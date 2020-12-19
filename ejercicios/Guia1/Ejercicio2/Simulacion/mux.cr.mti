@@ -1,0 +1,17 @@
+C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio2/Fuentes/mux.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio2/Fuentes/mux.vhd
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux
+-- Compiling architecture mux_arq of mux
+
+} {} {}} C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio2/Fuentes/mux_tb.vhd {1 {vcom -work work -2002 -explicit -stats=none {C:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio2\Fuentes\mux_tb.vhd}
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux_tb
+-- Compiling architecture mux_tb_arq of mux_tb
+
+} {} {}}

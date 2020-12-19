@@ -1,0 +1,17 @@
+C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates.vhd
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity logic_gates
+-- Compiling architecture logic_gates_arq of logic_gates
+
+} {} {}} C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates_tb.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates_tb.vhd
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity logic_gates_tb
+-- Compiling architecture logic_gates_tb_arq of logic_gates_tb
+
+} {} {}}

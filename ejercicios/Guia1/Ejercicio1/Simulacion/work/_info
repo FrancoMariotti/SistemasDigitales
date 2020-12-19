@@ -7,25 +7,25 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-dC:/Users/Franco_M_32/Documents/sistemasDigitales/VHDLs/sumador1b/Simulacion
+dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio2/Simulacion
 Elogic_gates
 Z0 w1608345657
 Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
 Z3 dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Simulacion
-Z4 8C:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio1\Fuentes\gate_and.vhd
-Z5 FC:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio1\Fuentes\gate_and.vhd
+Z4 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates.vhd
+Z5 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates.vhd
 l0
 L5
 V=WNc5=fh9MVnlAkKNCa5=0
 !s100 afHfc?zaKWZ97Q42D=AkV2
 Z6 OP;C;10.4a;61
 32
-Z7 !s110 1608345858
+Z7 !s110 1608405355
 !i10b 1
-Z8 !s108 1608345857.000000
-Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio1\Fuentes\gate_and.vhd|
-Z10 !s107 C:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio1\Fuentes\gate_and.vhd|
+Z8 !s108 1608405355.000000
+Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates.vhd|
+Z10 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates.vhd|
 !i113 1
 Z11 o-work work -2002 -explicit -O0
 Z12 tExplicit 1
@@ -52,19 +52,19 @@ Z13 w1608345848
 R1
 R2
 R3
-Z14 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/gate_and_tb.vhd
-Z15 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/gate_and_tb.vhd
+Z14 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates_tb.vhd
+Z15 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates_tb.vhd
 l0
 L5
 VYBh:GiFlDa=_hgMR<fTf>2
 !s100 6W9WKMXF?>;5Y1BHOb@z82
 R6
 32
-Z16 !s110 1608345857
+R7
 !i10b 1
 R8
-Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/gate_and_tb.vhd|
-Z18 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/gate_and_tb.vhd|
+Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates_tb.vhd|
+Z17 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Fuentes/logic_gates_tb.vhd|
 !i113 1
 R11
 R12
@@ -78,11 +78,11 @@ VTQ`3jk`o:6Xa:g9BL<[mH1
 !s100 iGR0RLlnPT8o8@bz5E[SE2
 R6
 32
-R16
+R7
 !i10b 1
 R8
+R16
 R17
-R18
 !i113 1
 R11
 R12
