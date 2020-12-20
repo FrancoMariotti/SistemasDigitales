@@ -1,0 +1,90 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio1/Simulacion
+Emux
+Z0 w1608421905
+Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z3 dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio3/Simulacion
+Z4 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio3/Fuentes/mux.vhd
+Z5 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio3/Fuentes/mux.vhd
+l0
+L4
+V71H12ZciIL>bC]SNH5:2T1
+!s100 =GVM62b:oFn?jQ6QA4d1@1
+Z6 OP;C;10.4a;61
+32
+Z7 !s110 1608423084
+!i10b 1
+Z8 !s108 1608423084.000000
+Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio3/Fuentes/mux.vhd|
+Z10 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio3/Fuentes/mux.vhd|
+!i113 1
+Z11 o-work work -2002 -explicit -O0
+Z12 tExplicit 1
+Amux_arq
+R1
+R2
+Z13 DEx4 work 3 mux 0 22 71H12ZciIL>bC]SNH5:2T1
+l18
+L16
+Z14 Vj<TQk?m@V5170A@YOP7<g2
+Z15 !s100 =N>>YDjz64FZ0MEKCV?3l0
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Emux_tb
+Z16 w1608423078
+Z17 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+R1
+R2
+R3
+Z18 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio3/Fuentes/mux_tb.vhd
+Z19 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio3/Fuentes/mux_tb.vhd
+l0
+L5
+VFQIBh7UM:mbeBobBjOKP71
+!s100 aYQzSY>k[T331[KTbFkOl3
+R6
+32
+R7
+!i10b 1
+R8
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio3/Fuentes/mux_tb.vhd|
+Z21 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio3/Fuentes/mux_tb.vhd|
+!i113 1
+R11
+R12
+Amux_tb_arq
+R17
+R1
+R2
+DEx4 work 6 mux_tb 0 22 FQIBh7UM:mbeBobBjOKP71
+l30
+L8
+VBNbgnnk>nQ?ElS<JN<>@b2
+!s100 KFC]3cKS;OO]@J?1mGWI02
+R6
+32
+R7
+!i10b 1
+R8
+R20
+R21
+!i113 1
+R11
+R12
