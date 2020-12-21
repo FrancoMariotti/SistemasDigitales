@@ -1,0 +1,90 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio4/Simulacion
+Emulnb
+Z0 w1608518512
+Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z4 dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio6/Simulacion
+Z5 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio6/Fuentes/mulNb.vhd
+Z6 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio6/Fuentes/mulNb.vhd
+l0
+L7
+VUN@YN5[_R@50R2h?LA`0_1
+!s100 V36ZNl]ihODBlAzU:=8cm0
+Z7 OP;C;10.4a;61
+32
+Z8 !s110 1608518531
+!i10b 1
+Z9 !s108 1608518531.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio6/Fuentes/mulNb.vhd|
+Z11 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio6/Fuentes/mulNb.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit -O0
+Z13 tExplicit 1
+Amulnb_arq
+R1
+R2
+R3
+DEx4 work 5 mulnb 0 22 UN@YN5[_R@50R2h?LA`0_1
+l17
+L16
+VY1`S[HF2PVzYONiS7cYz`0
+!s100 d^H6j[1bUd[UPGaAaRK;R3
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Emulnb_tb
+Z14 w1608518528
+R2
+R3
+R4
+Z15 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio6/Fuentes/mulNb_tb.vhd
+Z16 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio6/Fuentes/mulNb_tb.vhd
+l0
+L4
+VkdFlFghVD3HC8m<f`J29H3
+!s100 QVR:k^F>=e]zdSZFY:eZK0
+R7
+32
+R8
+!i10b 1
+R9
+Z17 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio6/Fuentes/mulNb_tb.vhd|
+Z18 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio6/Fuentes/mulNb_tb.vhd|
+!i113 1
+R12
+R13
+Amulnb_tb_arq
+R2
+R3
+Z19 DEx4 work 8 mulnb_tb 0 22 kdFlFghVD3HC8m<f`J29H3
+l23
+L8
+Z20 VXL;b_b`R5kCB2JEdQ:Al42
+Z21 !s100 lHTHQigSe4a5:IAS4@dXU0
+R7
+32
+R8
+!i10b 1
+R9
+R17
+R18
+!i113 1
+R12
+R13
