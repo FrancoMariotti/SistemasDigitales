@@ -16,7 +16,6 @@ architecture contador_tb_arq of contador_tb is
 	end component;
 	
 	constant N_tb: natural := 4;
-	constant SIM_TIME_NS : time := 200 ns;
 	
 	signal clk_tb:	std_logic := '0';
 	signal rst_tb:	std_logic;
