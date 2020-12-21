@@ -1,0 +1,107 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio7/Simulacion
+Effd
+Z0 w1608560980
+Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z3 dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio8/Simulacion
+Z4 8C:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio8\Fuentes\ffd.vhd
+Z5 FC:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio8\Fuentes\ffd.vhd
+l0
+L4
+Vk?jEE5P5RRQabhHezXUGK2
+!s100 [cLhI5o=5hDzNNHZ0F0_A2
+Z6 OP;C;10.4a;61
+32
+Z7 !s110 1608561070
+!i10b 1
+Z8 !s108 1608561070.000000
+Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio8\Fuentes\ffd.vhd|
+Z10 !s107 C:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio8\Fuentes\ffd.vhd|
+!i113 1
+Z11 o-work work -2002 -explicit -O0
+Z12 tExplicit 1
+Affd_arq_2
+R1
+R2
+Z13 DEx4 work 3 ffd 0 22 k?jEE5P5RRQabhHezXUGK2
+l29
+L28
+Z14 Vcz>HTezD5C7lP1abA:EXl1
+Z15 !s100 5Y2QiJegWijeeGL7R18hY3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Affd_arq
+R1
+R2
+R13
+l15
+L14
+Z16 VTL_KXFm2`<dNZ_L6LllCW1
+Z17 !s100 Mk?:gMg4ohLHaWDnfMG9e3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Effd_tb
+Z18 w1608561029
+R1
+R2
+R3
+Z19 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio8/Fuentes/ffd_tb.vhd
+Z20 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio8/Fuentes/ffd_tb.vhd
+l0
+L4
+V:ImEKkhO3hDEe@lcz7LQT3
+!s100 10Cd0GAIA]]eFGKOH@h541
+R6
+32
+R7
+!i10b 1
+R8
+Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio8/Fuentes/ffd_tb.vhd|
+Z22 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio8/Fuentes/ffd_tb.vhd|
+!i113 1
+R11
+R12
+Affd_tb_arq
+R13
+R1
+R2
+DEx4 work 6 ffd_tb 0 22 :ImEKkhO3hDEe@lcz7LQT3
+l23
+L7
+VUj>GoL^Qng3adP:G:jkO;3
+!s100 2[`WRQXgBB5TP?9lhPmV;1
+R6
+32
+R7
+!i10b 1
+R8
+R21
+R22
+!i113 1
+R11
+R12
