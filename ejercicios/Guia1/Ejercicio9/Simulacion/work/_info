@@ -1,0 +1,127 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio8/Simulacion
+Effd
+Z0 w1608565192
+Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z3 dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Simulacion
+Z4 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/ffd.vhd
+Z5 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/ffd.vhd
+l0
+L4
+Vk?jEE5P5RRQabhHezXUGK2
+!s100 [cLhI5o=5hDzNNHZ0F0_A2
+Z6 OP;C;10.4a;61
+32
+Z7 !s110 1608566472
+!i10b 1
+Z8 !s108 1608566472.000000
+Z9 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/ffd.vhd|
+Z10 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/ffd.vhd|
+!i113 1
+Z11 o-work work -2002 -explicit -O0
+Z12 tExplicit 1
+Affd_arq
+R1
+R2
+DEx4 work 3 ffd 0 22 k?jEE5P5RRQabhHezXUGK2
+l15
+L14
+VTL_KXFm2`<dNZ_L6LllCW1
+!s100 Mk?:gMg4ohLHaWDnfMG9e3
+R6
+32
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Eregnb
+Z13 w1608566400
+R1
+R2
+R3
+Z14 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/regNb.vhd
+Z15 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/regNb.vhd
+l0
+L4
+VoN8ZimhXZcZTX62W6U2@h2
+!s100 :jQ:dUbCJR0?AmL^eHgb>1
+R6
+32
+R7
+!i10b 1
+R8
+Z16 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/regNb.vhd|
+Z17 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/regNb.vhd|
+!i113 1
+R11
+R12
+Aregnb_arq
+R1
+R2
+Z18 DEx4 work 5 regnb 0 22 oN8ZimhXZcZTX62W6U2@h2
+l26
+L17
+Z19 V>>90K:mgbW@GEO3mdAjfX1
+Z20 !s100 O^79cHn5O2djL33fQBS332
+R6
+32
+R7
+!i10b 1
+R8
+R16
+R17
+!i113 1
+R11
+R12
+Eregnb_tb
+Z21 w1608566462
+R1
+R2
+R3
+Z22 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/regNb_tb.vhd
+Z23 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/regNb_tb.vhd
+l0
+L4
+V_?<@BIS?1gX]IOzGgS4dh0
+!s100 i:d;?eT9JAFla0kJ8a9I;2
+R6
+32
+R7
+!i10b 1
+R8
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/regNb_tb.vhd|
+Z25 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio9/Fuentes/regNb_tb.vhd|
+!i113 1
+R11
+R12
+Aregnb_tb_arq
+R1
+R2
+DEx4 work 8 regnb_tb 0 22 _?<@BIS?1gX]IOzGgS4dh0
+l27
+L7
+Va6XQE0m_mgigmR@dB[G>V3
+!s100 T`_KR1l`[fUzD0KBMLRb:3
+R6
+32
+R7
+!i10b 1
+R8
+R24
+R25
+!i113 1
+R11
+R12
