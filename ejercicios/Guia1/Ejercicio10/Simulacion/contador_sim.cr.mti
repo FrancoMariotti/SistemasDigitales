@@ -6,7 +6,7 @@ Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 
 -- Compiling entity contador_tb
 -- Compiling architecture contador_tb_arq of contador_tb
 
-} {} {}} C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio10/Fuentes/contador.vhd {1 {vcom -work work -2002 -explicit -stats=none {C:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio10\Fuentes\contador.vhd}
+} {} {}} C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio10/Fuentes/contador.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio10/Fuentes/contador.vhd
 Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
 -- Loading package STANDARD
 -- Loading package TEXTIO
