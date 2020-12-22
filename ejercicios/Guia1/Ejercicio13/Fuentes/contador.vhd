@@ -23,7 +23,7 @@ begin
 		if rst_i = '1' then
 			count <= (others => '0');
 		elsif rising_edge(clk_i) and ena_i = '1' then
-			if	load_i = '1' then 
+			if load_i = '1' then 
 				count <= unsigned(value_i);
 			else
 				count <= count + 1;	
