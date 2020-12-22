@@ -1,0 +1,90 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio12/Simulacion
+Econtador
+Z0 w1608649151
+Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z4 dC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio13/Simulacion
+Z5 8C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio13/Fuentes/contador.vhd
+Z6 FC:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio13/Fuentes/contador.vhd
+l0
+L5
+VhRG?;b?mefDc?QIM165>z1
+!s100 aC_=;b0EUDX89?MlLQd8U2
+Z7 OP;C;10.4a;61
+32
+Z8 !s110 1608650491
+!i10b 1
+Z9 !s108 1608650491.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio13/Fuentes/contador.vhd|
+Z11 !s107 C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio13/Fuentes/contador.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit -O0
+Z13 tExplicit 1
+Acontador_arq
+R1
+R2
+R3
+Z14 DEx4 work 8 contador 0 22 hRG?;b?mefDc?QIM165>z1
+l20
+L18
+Z15 Vc9feToXbUzj39@K3Y=a[z1
+Z16 !s100 DJABgXVoX;^Ma@lN;k9J:1
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Econtador_tb
+Z17 w1608650486
+R2
+R3
+R4
+Z18 8C:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio13\Fuentes\contador_tb.vhd
+Z19 FC:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio13\Fuentes\contador_tb.vhd
+l0
+L4
+VQ5HMmWBRJHkg1TA2MgncA2
+!s100 ]iUlfHKFEM>>Sj83KHG1U1
+R7
+32
+R8
+!i10b 1
+R9
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio13\Fuentes\contador_tb.vhd|
+Z21 !s107 C:\Users\Franco_M_32\Documents\sistemasDigitales\SistemasDigitales\ejercicios\Guia1\Ejercicio13\Fuentes\contador_tb.vhd|
+!i113 1
+R12
+R13
+Acontador_tb_arq
+R2
+R3
+DEx4 work 11 contador_tb 0 22 Q5HMmWBRJHkg1TA2MgncA2
+l30
+L8
+V1zH7<8Chk;n2GO9:49<IJ0
+!s100 7WVU]Xf[1kFakmdSf8Ad@0
+R7
+32
+R8
+!i10b 1
+R9
+R20
+R21
+!i113 1
+R12
+R13
