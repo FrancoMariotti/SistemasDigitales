@@ -22,7 +22,7 @@ begin
 		if rst_i = '1' then 
 			aux <= (others => '0');
 		elsif rising_edge(clk_i) and ena_i = '1' then
-			elsif load_i = '1' then
+			if load_i = '1' then
 				aux <= value_i;
 			else
 				aux(N-1 downto 1) <= aux(N-2 downto 0);
