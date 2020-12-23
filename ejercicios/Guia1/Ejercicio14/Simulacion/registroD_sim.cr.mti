@@ -6,12 +6,4 @@ Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 
 -- Compiling entity ffd
 -- Compiling architecture ffd_arq of ffd
 
-} {} {}} C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio14/Fuentes/regd.vhd {1 {vcom -work work -2002 -explicit -stats=none C:/Users/Franco_M_32/Documents/sistemasDigitales/SistemasDigitales/ejercicios/Guia1/Ejercicio14/Fuentes/regd.vhd
-Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling entity regd
--- Compiling architecture regd_arq of regd
-
 } {} {}}
