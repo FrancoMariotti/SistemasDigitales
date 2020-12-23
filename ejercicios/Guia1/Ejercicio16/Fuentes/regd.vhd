@@ -19,9 +19,9 @@ architecture regd_arq of regd is
 begin
 	process (clk_i,rst_i,load_i) is	
 	begin 
-		if rising_edge(clk_i) and ena_i = '1' then
-			if rst_i = '1' then 
-				aux <= (others => '0');
+		if rst_i = '1' then 
+			aux <= (others => '0');
+		elsif rising_edge(clk_i) and ena_i = '1' then
 			elsif load_i = '1' then
 				aux <= value_i;
 			else
