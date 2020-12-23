@@ -11,7 +11,6 @@ entity regd is
 	);
 end;
 
-
 architecture regd_arq of regd is
 	component ffd is
 		port(
