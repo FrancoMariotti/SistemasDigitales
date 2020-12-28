@@ -1,0 +1,12 @@
+aux(0) <= A;
+
+generate_retardo: for i in 0 to DELAY generate
+	sin_retardo: if i=0 generate
+		aux(1) <= aux(0)
+	end generate;
+	con_retardo: if i > 0 generate
+		aa: ffd port_map(clk => clk, rst => '0', D => aux(i), Q => aux(i+1));
+	end generate;
+end generate;
+
+B <= aux(DELAY + 1);
