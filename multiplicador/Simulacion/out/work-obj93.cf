@@ -1,0 +1,16 @@
+v 4
+file . "../Fuentes/multiplicador_tb.vhd" "ab44f6b947a6b4934aca5d1ee332473a8e50be05" "20201229175342.432":
+  entity multiplicador_tb at 1( 0) + 0 on 91;
+  architecture multiplicador_tb_arq of multiplicador_tb at 9( 104) + 0 on 92;
+file . "../Fuentes/sumNb.vhd" "b94491db1fdd563e0633ed082f981490f1ae1331" "20201229150400.918":
+  entity sumnb at 1( 0) + 0 on 15;
+  architecture sumnb_arq of sumnb at 19( 349) + 0 on 16;
+file . "../Fuentes/ffd.vhd" "bda5e38e674f2135a3f1eedcee8404ad0d28404a" "20201229155151.904":
+  entity ffd at 1( 0) + 0 on 45;
+  architecture ffd_arq of ffd at 14( 201) + 0 on 46;
+file . "../Fuentes/regNb.vhd" "c9c755333a5e80a652d2f10316c50b5dd9a64b91" "20201229170502.150":
+  entity regnb at 1( 0) + 0 on 63;
+  architecture regnb_arq of regnb at 17( 240) + 0 on 64;
+file . "../Fuentes/multiplicador.vhd" "101752a1fe099403d1abf3f7ec837b7c0bf48f8c" "20201229172943.584":
+  entity multiplicador at 1( 0) + 0 on 83;
+  architecture multiplicador_arq of multiplicador at 19( 344) + 0 on 84;
