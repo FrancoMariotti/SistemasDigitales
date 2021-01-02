@@ -1,0 +1,13 @@
+v 4
+file . "multiplicador_tb.vhd" "ed8ea9be5a51c665429bb9ce4137e03826e8ecf6" "20210102022537.508":
+  entity multiplicador_tb at 1( 0) + 0 on 29;
+  architecture multiplicador_tb_arq of multiplicador_tb at 9( 104) + 0 on 30;
+file . "sumNb.vhd" "b94491db1fdd563e0633ed082f981490f1ae1331" "20210102020219.545":
+  entity sumnb at 1( 0) + 0 on 17;
+  architecture sumnb_arq of sumnb at 19( 349) + 0 on 18;
+file . "regNb.vhd" "c150a16619cfa2a817223adf43007a91e806a959" "20210102020216.966":
+  entity regnb at 1( 0) + 0 on 15;
+  architecture regnb_arq of regnb at 18( 264) + 0 on 16;
+file . "multiplicador.vhd" "50d9c89c5d793a14d568b04f1fd7c9282e06119a" "20210102022302.986":
+  entity multiplicador at 1( 0) + 0 on 25;
+  architecture multiplicador_arq of multiplicador at 19( 346) + 0 on 26;
