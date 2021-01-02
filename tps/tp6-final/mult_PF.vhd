@@ -1,3 +1,5 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
 
 --mutiplicador de punto flotante.
 entity mult_PF is
