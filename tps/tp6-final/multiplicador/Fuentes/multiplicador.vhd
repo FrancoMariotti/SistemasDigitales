@@ -11,6 +11,7 @@ entity multiplicador is
 		load_i   : in std_logic;
 		opA_i    : in std_logic_vector(N-1 downto 0);
 		opB_i    : in std_logic_vector(N-1 downto 0);
+		done_o   : out std_logic;
 		product_o: out std_logic_vector(2*N-1 downto 0)
 	);
 end;
@@ -53,11 +54,13 @@ begin
 		if load_i = '1' then
 			enaRegP <= '1';	
 			enaRegB <= '1';
+			done <= '0';
 			counter := 0;
 		elsif rising_edge(clk_i) then
 			if counter = N-1  then
 				enaRegP <= '0';
 				enaRegB <= '0';
+				done <= '1';
 			else
 				counter := counter + 1;
 			end if;
@@ -114,7 +117,7 @@ begin
 			co_o => co
 		);
 	entP <= co & salSum(N-1 downto 1);
-	aux  <= salA  when salB(0) = '1' else (N-1 downto 0 => '0');
+	aux  <= salA  when (salB(0) = '1' and load_i = '0') else (N-1 downto 0 => '0');
 	entB <= opB_i when load_i = '1' else salSum(0) & salB(N-1 downto 1);
 	product_o <= salP & salB; 
 end multiplicador_arq;
