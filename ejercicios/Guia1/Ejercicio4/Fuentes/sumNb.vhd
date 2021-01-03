@@ -3,7 +3,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 
---sumador sin signo generico de N bits.
+--sumador generico de N bits.
 entity sumNb is
 	generic( N: natural := 4);
 	port(
