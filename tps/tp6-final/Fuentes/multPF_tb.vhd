@@ -21,13 +21,13 @@ architecture behavioral of multPF_tb is
 	end component;
 
 
-	constant SIM_TIME_NS: time := 300 ns;
+	constant SIM_TIME_NS: time := 800 ns;
 	constant TCK: time := 20 ns; 		-- periodo de reloj
 	constant WORD_SIZE_T:	natural	:=	23;
 	constant EXP_SIZE_T:	natural	:=	6;
 
-	signal	clk_tb:		std_logic;
-	signal	start_tb:	std_logic	:= '0';
+	signal	clk_tb:		std_logic := '0';
+	signal	start_tb:	std_logic;
 	signal	a_tb:		std_logic_vector(WORD_SIZE_T-1 downto 0);
 	signal	b_tb:		std_logic_vector(WORD_SIZE_T-1 downto 0);
 	signal	s_tb:		std_logic_vector(WORD_SIZE_T-1 downto 0);
@@ -37,7 +37,7 @@ begin
 	clk_tb		<= not(clk_tb) after TCK/ 2;
 	a_tb		<= std_logic_vector(to_unsigned(8323071,WORD_SIZE_T));
 	b_tb		<= std_logic_vector(to_unsigned(2007961,WORD_SIZE_T));
-	start_tb	<= '1' after 10 ns;
+	start_tb	<= '0','1' after 10 ns;
 
 	DUT: mult_PF
 		generic map(

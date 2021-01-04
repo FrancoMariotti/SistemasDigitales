@@ -53,7 +53,8 @@ architecture behavioral of mult_PF is
 	constant Nprod:				natural := 2*Nsignif;				--tamanio del producto de significands
 
 	signal pN:					std_logic;
-	signal bias:				std_logic_vector(EXP_SIZE-1 downto 0) := std_logic_vector(to_signed(-((2**EXP_SIZE)-1),EXP_SIZE));
+	signal bias:				std_logic_vector(EXP_SIZE-1 downto 0) := '0' & (EXP_SIZE-2 downto 0 => '1');--std_logic_vector(to_signed(-((2**EXP_SIZE)-1),EXP_SIZE))'';
+	signal minusBias:			std_logic_vector(EXP_SIZE-1 downto 0);
 
 	signal expA:				std_logic_vector(EXP_SIZE-1 downto 0);
 	signal expB:				std_logic_vector(EXP_SIZE-1 downto 0);
@@ -79,6 +80,8 @@ begin
 	significandA <= '1' & a_i(Nmant-1 downto 0);
 	significandB <= '1' & b_i(Nmant-1 downto 0);
 
+	minusBias <= std_logic_vector(signed(not bias) + 1);
+
 	-- instancia sumador de exponentes
 	sumador_exp: sumNb
 		generic map(
@@ -99,7 +102,7 @@ begin
 			N => EXP_SIZE
 		)
 		port map(
-			a_i		=> bias,
+			a_i		=> minusBias,
 			b_i		=> salSumExp,
 			ci_i	=> '0',
 			s_o		=> salSumBias,
