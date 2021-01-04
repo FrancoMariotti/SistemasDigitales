@@ -54,13 +54,13 @@ begin
 		if load_i = '1' then
 			enaRegP <= '1';	
 			enaRegB <= '1';
-			done <= '0';
+			done_o <= '0';
 			counter := 0;
 		elsif rising_edge(clk_i) then
 			if counter = N-1  then
 				enaRegP <= '0';
 				enaRegB <= '0';
-				done <= '1';
+				done_o <= '1';
 			else
 				counter := counter + 1;
 			end if;

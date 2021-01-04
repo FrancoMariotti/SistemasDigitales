@@ -1,10 +1,11 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
 
 --mutiplicador de punto flotante.
 entity mult_PF is
 	generic(
-		WORD_SIZE:	natural := 23,
+		WORD_SIZE:	natural := 23;
 		EXP_SIZE:	natural := 6
 	);
 	port(
@@ -52,14 +53,14 @@ architecture behavioral of mult_PF is
 	constant Nprod:				natural := 2*Nsignif;				--tamanio del producto de significands
 
 	signal pN:					std_logic;
-	signal bias:				std_logic_vector(EXP_SIZE-1 downto 0) := std_logic_vector(to_signed(-(2**(EXP_SIZE)-1),EXP_SIZE));
+	signal bias:				std_logic_vector(EXP_SIZE-1 downto 0) := std_logic_vector(to_signed(-((2**EXP_SIZE)-1),EXP_SIZE));
 
 	signal expA:				std_logic_vector(EXP_SIZE-1 downto 0);
 	signal expB:				std_logic_vector(EXP_SIZE-1 downto 0);
 	signal salSumExp:			std_logic_vector(EXP_SIZE-1 downto 0);
 	signal coSumExp:			std_logic;
-
-
+	
+	signal load_i:				std_logic;
 	signal salSumBias:			std_logic_vector(EXP_SIZE-1 downto 0);
 
 	signal entSumInc:			std_logic_vector(EXP_SIZE-1 downto 0);
@@ -67,8 +68,11 @@ architecture behavioral of mult_PF is
 
 	signal significandA:		std_logic_vector(Nsignif-1 downto 0);
 	signal significandB:		std_logic_vector(Nsignif-1 downto 0);
-	signal salMult:				std_logic_vector(Nprod downto 0);
+	signal salMult:				std_logic_vector(Nprod-1 downto 0);
 begin
+	
+	load_i <= not start_i;
+
 	expA <= a_i(WORD_SIZE-2 downto Nmant);
 	expB <= b_i(WORD_SIZE-2 downto Nmant);
 
@@ -108,7 +112,7 @@ begin
 			N => EXP_SIZE
 		)
 		port map(
-			a_i		=> salSumBias,
+			a_i 	=> salSumBias,
 			b_i		=> entSumInc,
 			ci_i	=> '0',
 			s_o		=> salSumInc,
@@ -122,7 +126,7 @@ begin
 		)
 		port map(
 			clk_i		=> clk_i, 
-			load_i		=> not start_i,
+			load_i		=> load_i,
 			opA_i		=> significandA,
 			opB_i		=> significandB,
 			done_o		=> open,
