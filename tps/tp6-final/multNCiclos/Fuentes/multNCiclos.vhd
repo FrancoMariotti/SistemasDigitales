@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 
-entity multiplicador is
+entity multNCiclos is
 	generic(
 		N: natural := 4
 	);
@@ -14,9 +14,9 @@ entity multiplicador is
 		done_o   : out std_logic;
 		product_o: out std_logic_vector(2*N-1 downto 0)
 	);
-end;
+end entity;
 
-architecture multiplicador_arq of multiplicador is
+architecture multNCiclos_arq of multNCiclos is
 	--declaracion del mponente registro
 	component regNb is
 		generic(
@@ -47,7 +47,9 @@ architecture multiplicador_arq of multiplicador is
 	signal entP,entB,salP,salSum,salB,salA,aux: std_logic_vector(N-1 downto 0);
 	signal co: 				std_logic;
 	signal done_aux: 		std_logic := 'X';
+
 begin
+
 	process(clk_i,load_i) is
 		variable counter: natural := N;
 	begin
@@ -123,4 +125,4 @@ begin
 	product_o <= salP & salB; 
 	
 	done_o <= done_aux;
-end multiplicador_arq;
+end architecture;

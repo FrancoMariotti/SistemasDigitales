@@ -5,7 +5,8 @@ use IEEE.numeric_std.all;
 entity multPF_tb is
 end;
 
-architecture behavioral of multPF_tb is
+architecture multPF_tb_arq of multPF_tb is
+	--declaracion de componente multiplicador de punto flotante.
 	component mult_PF is
 		generic(
 			WORD_SIZE:	natural := 23;
@@ -39,6 +40,7 @@ begin
 	b_tb		<= std_logic_vector(to_unsigned(2007961,WORD_SIZE_T));
 	start_tb	<= '0','1' after 10 ns;
 
+	--instancia multiplicador de punto flotante.
 	DUT: mult_PF
 		generic map(
 			WORD_SIZE	=> WORD_SIZE_T,

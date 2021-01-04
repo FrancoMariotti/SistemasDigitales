@@ -2,11 +2,12 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
+entity multNCiclos_tb is
+end entity ; -- multNCiclos_tb
 
-entity multiplicador_tb is
-end;
 
-architecture multiplicador_tb_arq of multiplicador_tb is
+architecture multNCiclos_tb_arq of multNCiclos_tb is
+	--declaracion de componente multiplicador.
 	component multiplicador is
 		generic(
 			N: natural := 4
@@ -30,7 +31,9 @@ architecture multiplicador_tb_arq of multiplicador_tb is
 	signal opB_tb : std_logic_vector(N_tb-1 downto 0) := std_logic_vector(to_unsigned(0,N_tb));
 	signal product_tb: std_logic_vector(2*N_tb-1 downto 0);
 	signal done_tb : std_logic;
+
 begin
+
 	clk_tb  <= not clk_tb after 10 ns;
  	
  	load_tb <= '1' after 100 ns, '0' after 120 ns,'1' after 460 ns, '0' after 480 ns;
@@ -50,11 +53,11 @@ begin
 		);
 
 
-	stop_simulation : process
+	frenar_simulacion: process
 		begin
-			wait for SIM_TIME_NS; --run the simulation for this duration
+			wait for SIM_TIME_NS;
 			assert false
-			report "Simulation finished."
-			severity failure;
+			report "Simulacion terminada."
+			severity note;
 		end process;
-end multiplicador_tb_arq;
+end architecture;

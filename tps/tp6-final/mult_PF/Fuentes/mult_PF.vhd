@@ -142,10 +142,11 @@ begin
 	entSumInc <= std_logic_vector(to_unsigned(1,EXP_SIZE)) when pN = '1' else 
 				 std_logic_vector(to_unsigned(0,EXP_SIZE));
 
-	-- mantisa del resultado.
+	--mantisa del resultado.
 	s_o(Nmant-1 downto 0) <= salMult(Nprod-2 downto Nsignif) when pN = '1' else 
 							 salMult(Nprod-3 downto Nsignif-1);
 
+	--exponente del resultado.
 	s_o(WORD_SIZE-2 downto Nmant) <= salSumInc;
 														
 	-- signo del resultado.
