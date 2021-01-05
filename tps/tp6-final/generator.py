@@ -36,10 +36,10 @@ def generate_adder_test_file():
 	    		a_file = a[i]
 	    		b_file = b[j]
 	    		z_file = a[i] + b[j]
-	    		if (a_file < 0):
-	    			a_file = a_file + (2**N)
-	    		if (z_file < 0):
-	    			z_file = z_file + (2**N)
+	    		#if (a_file < 0):
+	    		#	a_file = a_file + (2**N)
+	    		#if (z_file < 0):
+	    		#	z_file = z_file + (2**N)
 	    		writer.writerow([a_file,b_file,z_file])
 
 
