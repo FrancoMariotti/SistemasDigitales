@@ -1,25 +1,31 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+use std.textio.all;
 
 entity sumNb_tb is
 end entity ; -- sumNb_tb
 
 architecture sumNb_tb_arq of sumNb_tb is
 	
+	constant N_tb: natural  := 8;
+	constant TCK: time  := 20 ns;
+	constant DELAY: natural:= 0; 		-- retardo de procesamiento del DUT
+	
 	signal clk: std_logic:= '0';
-	signal a_file: unsigned(WORD_SIZE_T-1 downto 0):= (others => '0');
-	signal b_file: unsigned(WORD_SIZE_T-1 downto 0):= (others => '0');
-	signal z_file: unsigned(WORD_SIZE_T-1 downto 0):= (others => '0');
-	signal z_del: unsigned(WORD_SIZE_T-1 downto 0):= (others => '0');
-	signal z_dut: unsigned(WORD_SIZE_T-1 downto 0):= (others => '0');
+	signal a_file: unsigned(N_tb-1 downto 0):= (others => '0');
+	signal b_file: unsigned(N_tb-1 downto 0):= (others => '0');
+	--signal z_file: unsigned(N_tb-1 downto 0):= (others => '0');
+	signal z_del: unsigned(N_tb-1 downto 0):= (others => '0');
+	signal z_dut: unsigned(N_tb-1 downto 0):= (others => '0');
 	
 	signal ciclos: integer := 0;
 	signal errores: integer := 0;
 	
 	-- La senal z_del_aux se define por un problema de conversión
-	signal z_del_aux: std_logic_vector(WORD_SIZE_T-1 downto 0):= (others => '0');
+	--signal z_del_aux: std_logic_vector(N_tb-1 downto 0):= (others => '0');
 	
-	file datos: text open read_mode is "../test_mul_float_25_7.txt";
+	file datos: text open read_mode is "../../test_files/test_adder.txt";
 
 	--declaracion componente sumador N bits.
 	component sumNb is
@@ -33,12 +39,11 @@ architecture sumNb_tb_arq of sumNb_tb is
 		);
 	end component;
 
-	constant N_tb: natural  := 8;
 	signal ci_tb: std_logic := '0';
 	signal co_tb: std_logic;
-	signal a_tb: std_logic_vector(N_tb-1 downto 0);
-	signal b_tb: std_logic_vector(N_tb-1 downto 0);
-	signal s_tb: std_logic_vector(N_tb-1 downto 0);
+	--signal a_tb: std_logic_vector(N_tb-1 downto 0);
+	--signal b_tb: std_logic_vector(N_tb-1 downto 0);
+	--signal s_tb: std_logic_vector(N_tb-1 downto 0);
 begin
 	-- Generacion del clock del sistema
 	clk <= not(clk) after TCK/ 2; -- reloj
@@ -59,7 +64,7 @@ begin
 			b_file <= to_unsigned(aux, N_tb); 	-- se carga el valor del operando B
 			read(l, ch); 					-- se lee otro caracter (es el espacio)
 			read(l, aux); 					-- se lee otro entero
-			z_file <= to_unsigned(aux, N_tb); 	-- se carga el valor de salida (resultado)
+			z_del <= to_unsigned(aux, N_tb); 	-- se carga el valor de salida (resultado)
 		end loop;
 		
 		file_close(datos);		-- se cierra del archivo
@@ -73,10 +78,10 @@ begin
 			N => N_tb
 		)
 		port map(
-			a_i		=> a_tb,
-			b_i		=> b_tb,
+			a_i		=> std_logic_vector(a_file),
+			b_i		=> std_logic_vector(b_file),
 			ci_i 	=> ci_tb,
-			s_o 	=> s_tb,
+			unsigned(s_o)	=> z_dut,
 			co_o 	=> co_tb
 		);
 
