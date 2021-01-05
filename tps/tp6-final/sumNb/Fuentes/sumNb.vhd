@@ -11,7 +11,7 @@ entity sumNb is
 		s_o: 	out std_logic_vector(N-1 downto 0);
 		co_o: 	out std_logic
 	);
-end;
+end entity;
 
 
 architecture sumNb_arq of sumNb is
@@ -45,7 +45,7 @@ begin
 	
 	co_o <= aux(N);
 
-end;
+end architecture;
 
 
 --architecture sumNb_arq of sumNb is
@@ -54,4 +54,4 @@ end;
 --	res 	<= std_logic_vector(unsigned('0' & a_i & ci_i) + unsigned('0' & b_i & '1'));
 --	s_o	<= res(N downto 1);
 --	co_o 	<= res(N+1);
---end sumNb_arq;
+--end architecture;
