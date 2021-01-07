@@ -1,0 +1,10 @@
+v 4
+file . "../genEna/genEna.vhd" "52fa29e7c700bceed4afddf0aa8508b4165ef8ad" "20210106202234.759":
+  entity genena at 1( 0) + 0 on 15;
+  architecture genena_arq of genena at 17( 227) + 0 on 16;
+file . "contadorNbits_lento.vhd" "e058e80d752abaab53338de9ccaa43dc84918e78" "20210106202056.362":
+  entity contador_nbits_lento at 1( 0) + 0 on 11;
+  architecture contador_nbits_arq of contador_nbits_lento at 19( 294) + 0 on 12;
+file . "contadorNbits_lento_tb.vhd" "f512412c8f4f5d9a1d1f3a54ded0985c12ae61d9" "20210106202138.076":
+  entity contadornbits_lento_tb at 1( 0) + 0 on 13;
+  architecture contadornbits_lento_tb_arq of contadornbits_lento_tb at 8( 118) + 0 on 14;

@@ -1,3 +1,7 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
 --Contador de N bits generico
 entity contador_Nbits is
 	generic(
@@ -14,7 +18,7 @@ end;
 architecture contador_Nbits_arq of contador_Nbits is
 	component registro_simple is
 		generic(
-			N: natural := 4
+			N: natural := 4;
 			MAX_CUENTA: natural := 16
 		);
 		port(
@@ -54,7 +58,7 @@ begin
 			clk_i	=> clk_i,
 			d_i	=> salMuxRst,
 			q_o	=> salReg
-		)
+		);
 	sumNb_inst: sumNb
 		generic map(
 			N => N
@@ -65,7 +69,7 @@ begin
 			ci_i	=> '0',
 			s_o	=> salSum,
 			co_o	=> co_o
-		)
+		);
 	
 	--Multiplexor controlador por habilitador
 	salMuxEna <=	salSum when ena_i = '1' else
