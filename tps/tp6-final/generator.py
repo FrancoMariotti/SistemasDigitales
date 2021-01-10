@@ -44,7 +44,7 @@ def generate_adder_test_file():
 
 
 def main():
-	generate_adder_test_file();
+#	generate_adder_test_file();
 	generate_multiplier_test_file();
 
 
