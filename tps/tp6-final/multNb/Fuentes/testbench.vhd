@@ -3,41 +3,42 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use std.textio.all;
 
+entity PF_testbench is
+end entity PF_testbench;
 
-entity multNb_tb is
-end;
-
-architecture multNb_tb_arq of multNb_tb is
-
+architecture PF_testbench_arq of PF_testbench is
 	constant TCK: time:= 20 ns; 		-- periodo de reloj
 	constant DELAY: natural:= 0; 		-- retardo de procesamiento del DUT
-	constant WORD_SIZE_T: natural:= 5;	-- tamaÃ±o de datos
+	constant WORD_SIZE_T: natural:= 25;	-- tamaño de datos
+	constant EXP_SIZE_T: natural:= 7;   -- tamaño exponente
 	
 	signal clk: std_logic:= '0';
 	signal a_file: unsigned(WORD_SIZE_T-1 downto 0):= (others => '0');
 	signal b_file: unsigned(WORD_SIZE_T-1 downto 0):= (others => '0');
-	signal z_file: unsigned(2*WORD_SIZE_T-1 downto 0):= (others => '0');
-	signal z_del: unsigned(2*WORD_SIZE_T-1 downto 0):= (others => '0');
-	signal z_dut: unsigned(2*WORD_SIZE_T-1 downto 0):= (others => '0');
+	signal z_file: unsigned(WORD_SIZE_T-1 downto 0):= (others => '0');
+	signal z_del: unsigned(WORD_SIZE_T-1 downto 0):= (others => '0');
+	signal z_dut: unsigned(WORD_SIZE_T-1 downto 0):= (others => '0');
 	
 	signal ciclos: integer := 0;
 	signal errores: integer := 0;
 	
-	-- La senal z_del_aux se define por un problema de conversiÃ³n
-	signal z_del_aux: std_logic_vector(2*WORD_SIZE_T-1 downto 0):= (others => '0');
+	-- La senal z_del_aux se define por un problema de conversión
+	signal z_del_aux: std_logic_vector(WORD_SIZE_T-1 downto 0):= (others => '0');
 	
-	file datos: text open read_mode is "../test_files/test_mult_5bit.txt";
+	file datos: text open read_mode is "../test_mul_float_25_7.txt";
 	
-	component multNb is
+	-- Declaracion del componente a probar
+	component xxx_PF is
 		generic(
-			N: natural := 4
+			WORD_SIZE: natural := 25;
+			EXP_SIZE: natural := 7
 		);
 		port(
-			multiplicand: in std_logic_vector(N-1 downto 0);
-			multiplier:	in std_logic_vector(N-1 downto 0);
-			result:	out std_logic_vector(2*N-1 downto 0)
+			A: in std_logic_vector(WORD_SIZE-1 downto 0);	-- Operando A
+			B: in std_logic_vector(WORD_SIZE-1 downto 0);	-- Operando B
+			S: out std_logic_vector(WORD_SIZE-1 downto 0)	-- Resultado
 		);
-	end component;
+	end component xxx_PF;
 	
 	-- Declaracion de la linea de retardo
 	component delay_gen is
@@ -51,15 +52,8 @@ architecture multNb_tb_arq of multNb_tb is
 			B: out std_logic_vector(N-1 downto 0)
 		);
 	end component;
-
-	constant SIM_TIME_NS : time := 400 ns;
-
-	--constant N_tb : natural := 5; 
-	--signal opA_tb : std_logic_vector(N_tb-1 downto 0) := std_logic_vector(to_unsigned(3,N_tb));
-	--signal opB_tb : std_logic_vector(N_tb-1 downto 0) := std_logic_vector(to_unsigned(2,N_tb));
-	--signal result_tb: std_logic_vector(2*N_tb-1 downto 0);
+	
 begin
-	--opB_tb  <= std_logic_vector(to_unsigned(6,N_tb)) after 100 ns,std_logic_vector(to_unsigned(3,N_tb)) after 300 ns;
 	-- Generacion del clock del sistema
 	clk <= not(clk) after TCK/ 2; -- reloj
 
@@ -79,7 +73,7 @@ begin
 			b_file <= to_unsigned(aux, WORD_SIZE_T); 	-- se carga el valor del operando B
 			read(l, ch); 					-- se lee otro caracter (es el espacio)
 			read(l, aux); 					-- se lee otro entero
-			z_file <= to_unsigned(aux, 2*WORD_SIZE_T); 	-- se carga el valor de salida (resultado)
+			z_file <= to_unsigned(aux, WORD_SIZE_T); 	-- se carga el valor de salida (resultado)
 		end loop;
 		
 		file_close(datos);		-- se cierra del archivo
@@ -87,22 +81,22 @@ begin
 		assert false report		-- se aborta la simulacion (fin del archivo)
 			"Fin de la simulacion" severity failure;
 	end process Test_Sequence;
-
-
-	DUT: multNb
-		generic map(
-			N => WORD_SIZE_T
-		)
-		port map (
-			multiplicand		=> std_logic_vector(a_file),
-			multiplier			=> std_logic_vector(b_file),
-			unsigned(result)	=> z_dut
-		);
-
-
+	
+	-- Instanciacion del DUT
+	DUT: xxx_PF
+			generic map(
+				WORD_SIZE => WORD_SIZE_T,
+				EXP_SIZE => EXP_SIZE_T
+			)
+			port map(
+				A => std_logic_vector(a_file),
+				B => std_logic_vector(b_file),
+				unsigned(S) => z_dut
+			);
+	
 	-- Instanciacion de la linea de retardo
 	del: delay_gen
-			generic map(2*WORD_SIZE_T, DELAY)
+			generic map(WORD_SIZE_T, DELAY)
 			port map(clk, std_logic_vector(z_file), z_del_aux);
 				
 	z_del <= unsigned(z_del_aux);
@@ -124,11 +118,4 @@ begin
 		end if;
 	end process;
 
-	--stop_simulation : process
-	--	begin
-	--		wait for SIM_TIME_NS; --run the simulation for this duration
-	--		assert false
-	--		report "Simulation finished."
-	--		severity failure;
-	--	end process;
-end multNb_tb_arq;
+end architecture PF_testbench_arq; 

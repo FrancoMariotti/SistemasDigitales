@@ -1,13 +1,19 @@
 v 4
-file . "../../sumNb/Fuentes/sumNb.vhd" "044a4ff511cf899f37040391af9e81994e233cb0" "20210110180104.806":
-  entity sumnb at 1( 0) + 0 on 15;
-  architecture sumnb_arq of sumnb at 17( 319) + 0 on 16;
-file . "multNb_tb.vhd" "bc3dedd42dac87b17655af4cac0a4c387f168a6d" "20210110202023.559":
-  entity multnb_tb at 1( 0) + 0 on 131;
-  architecture multnb_tb_arq of multnb_tb at 9( 97) + 0 on 132;
-file . "multNb.vhd" "143086cca15ba91f17144d219df2cbaabbda61c1" "20210110201515.381":
-  entity multnb at 1( 0) + 0 on 125;
-  architecture multnb_arq of multnb at 16( 301) + 0 on 126;
-file . "../../sumNb/Fuentes/sum1b.vhd" "55f8c22aae2f5f425b649c25df537b7f3ac31a05" "20210110180107.814":
-  entity sum1b at 1( 0) + 0 on 17;
-  architecture sum1b_arq of sum1b at 14( 188) + 0 on 18;
+file . "./../../delay/ffd.vhd" "bf7d8570bc29ffdd947930b9a74611e25d9c2feb" "20210111031614.143":
+  entity ffd at 1( 0) + 0 on 21;
+  architecture pp of ffd at 14( 247) + 0 on 22;
+file . "./../../sumNb/Fuentes/sumNb.vhd" "044a4ff511cf899f37040391af9e81994e233cb0" "20210111031556.850":
+  entity sumnb at 1( 0) + 0 on 17;
+  architecture sumnb_arq of sumnb at 17( 319) + 0 on 18;
+file . "./../Fuentes/multNb_tb.vhd" "8f373d4b5d25ec39172b98db3c2cbde3101c432a" "20210111032910.551":
+  entity multnb_tb at 1( 0) + 0 on 37;
+  architecture multnb_tb_arq of multnb_tb at 10( 117) + 0 on 38;
+file . "./../Fuentes/multNb.vhd" "52a1685ac8d2f7cf964a39f593683b9ecd16de09" "20210111031425.964":
+  entity multnb at 1( 0) + 0 on 11;
+  architecture multnb_arq of multnb at 16( 301) + 0 on 12;
+file . "./../../sumNb/Fuentes/sum1b.vhd" "55f8c22aae2f5f425b649c25df537b7f3ac31a05" "20210111031551.774":
+  entity sum1b at 1( 0) + 0 on 15;
+  architecture sum1b_arq of sum1b at 14( 188) + 0 on 16;
+file . "./../../delay/delay.vhd" "606e012cef1622a181cee18706e06fb5f9f432bf" "20210111031609.745":
+  entity delay_gen at 1( 0) + 0 on 19;
+  architecture del of delay_gen at 16( 251) + 0 on 20;

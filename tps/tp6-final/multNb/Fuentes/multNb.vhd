@@ -45,34 +45,20 @@ begin
 		b_aux(i) <= (N-1 downto 0 => multiplier(i+1)) and multiplicand;
 		result(i+1) <= salSum(i)(0);
 		
-		mult2_bit: if i = 0 generate
-			adder_inst: sumNb
-				generic map(
-					N => N
-				)
-				port map(
-					a_i 	=> a_aux(i),
-					b_i 	=> b_aux(i),	
-					ci_i	=> '0', 	
-					s_o		=> salSum(i),
-					co_o	=> salCo(i) 	
-				);
-		end generate;
+		adder_inst: sumNb
+			generic map(
+				N => N
+			)
+			port map(
+				a_i 	=> a_aux(i),
+				b_i 	=> b_aux(i),	
+				ci_i	=> '0', 	
+				s_o		=> salSum(i),
+				co_o	=> salCo(i) 	
+			);
 
-		multN_bit: if i > 0 generate
+		proximo_A: if i > 0 generate
 			a_aux(i) <= salCo(i-1) & salSum(i-1)(N-1 downto 1);
-			adder_inst: sumNb
-				generic map(
-					N => N
-				)
-				port map(
-					a_i 	=> a_aux(i),
-					b_i 	=> b_aux(i),	
-					ci_i	=> '0', 	
-					s_o		=> salSum(i),
-					co_o	=> salCo(i) 	
-				);
-			result(i+1) <= salSum(i)(0);
 		end generate;
 	end generate ; -- gen_multiplicadors
 
