@@ -57,34 +57,34 @@ architecture behavioral of mult_PF is
 		);
 	end component;
 	
-	signal negToNeg:		std_logic;							    
-	signal posToNeg:		std_logic;							    
-	signal negToPos:		std_logic;							    
+	signal negToNeg:	std_logic;							    
+	signal posToNeg:	std_logic;							    
+	signal negToPos:	std_logic;							    
 
-	signal resMultMsb:		std_logic;	--bit mas significativo de la salida del multiplicador
-	signal underflow:		std_logic;	--bit de underflow
-	signal overflow:		std_logic;	--bit de overflow
+	signal resMultMsb:	std_logic;	--bit mas significativo de la salida del multiplicador
+	signal underflow:	std_logic;	--bit de underflow
+	signal overflow:	std_logic;	--bit de overflow
 
-	signal expA:			std_logic_vector(EXP_SIZE-1 downto 0);	--exponente operador A
-	signal expB:			std_logic_vector(EXP_SIZE-1 downto 0);	--exponente operador B
-	signal salSumExp:		std_logic_vector(EXP_SIZE-1 downto 0);	--salida sumador de exponentes
+	signal expA:	std_logic_vector(EXP_SIZE-1 downto 0);	--exponente operador A
+	signal expB:	std_logic_vector(EXP_SIZE-1 downto 0);	--exponente operador B
+	signal salSumExp:	std_logic_vector(EXP_SIZE-1 downto 0);	--salida sumador de exponentes
 
-	signal salSumBias:		std_logic_vector(EXP_SIZE-1 downto 0);	--salida sumador de bias
+	signal salSumBias:	std_logic_vector(EXP_SIZE-1 downto 0);	--salida sumador de bias
 
-	signal entSumInc:		std_logic_vector(EXP_SIZE-1 downto 0);	--entrada incrementador exponente
-	signal salSumInc:		std_logic_vector(EXP_SIZE-1 downto 0);	--salida incrementador exponente
+	signal entSumInc:	std_logic_vector(EXP_SIZE-1 downto 0);	--entrada incrementador exponente
+	signal salSumInc:	std_logic_vector(EXP_SIZE-1 downto 0);	--salida incrementador exponente
 
 	signal significandA:	std_logic_vector(N_SIGNIF-1 downto 0);	--significAND operador A
 	signal significandB:	std_logic_vector(N_SIGNIF-1 downto 0);	--significAND operador B
-	signal salMult:				std_logic_vector(N_PROD-1 downto 0);		--salida multiplicador de significANDs
+	signal salMult:	std_logic_vector(N_PROD-1 downto 0);		--salida multiplicador de significANDs
 	
 	signal salRestBiasA:	std_logic_vector(EXP_SIZE-1 downto 0);	--salida restador de bias del operador A
 	signal salRestBiasB:	std_logic_vector(EXP_SIZE-1 downto 0);	--salida restador de bias del operador B
 
-	signal salMuxMult:		std_logic_vector(N_MANT-1 downto 0);	--salida del multiplexor que conecta la salida del multiplicador.
+	signal salMuxMult:	std_logic_vector(N_MANT-1 downto 0);	--salida del multiplexor que conecta la salida del multiplicador.
 	signal salMuxMantisa:	std_logic_vector(N_MANT-1 downto 0);	--salida del multiplexor que conecta la mantisa a la salida.
 
-	signal salMuxExp:		std_logic_vector(EXP_SIZE-1 downto 0);
+	signal salMuxExp:	std_logic_vector(EXP_SIZE-1 downto 0);
 
 
 	function is_all(vector: std_logic_vector; value: std_logic) return std_logic is
@@ -110,10 +110,10 @@ architecture behavioral of mult_PF is
 			N => EXP_SIZE
 		)
 		port map(
-			a_i		=> MINUS_BIAS,
-			b_i		=> expA,
+			a_i	=> MINUS_BIAS,
+			b_i	=> expA,
 			ci_i	=> '0',
-			s_o		=> salRestBiasA,
+			s_o	=> salRestBiasA,
 			co_o	=> open
 		);
 
@@ -123,10 +123,10 @@ architecture behavioral of mult_PF is
 			N => EXP_SIZE
 		)
 		port map(
-			a_i		=> MINUS_BIAS,
-			b_i		=> expB,
+			a_i	=> MINUS_BIAS,
+			b_i	=> expB,
 			ci_i	=> '0',
-			s_o		=> salRestBiasB,
+			s_o	=> salRestBiasB,
 			co_o	=> open
 		);
 
@@ -136,10 +136,10 @@ architecture behavioral of mult_PF is
 			N => EXP_SIZE
 		)
 		port map(
-			a_i		=> salRestBiasA,
-			b_i		=> salRestBiasB,
+			a_i	=> salRestBiasA,
+			b_i	=> salRestBiasB,
 			ci_i	=> '0',
-			s_o		=> salSumExp,
+			s_o	=> salSumExp,
 			co_o	=> open
 		);
 
@@ -149,10 +149,10 @@ architecture behavioral of mult_PF is
 			N => EXP_SIZE
 		)
 		port map(
-			a_i		=> salSumExp,
-			b_i		=> entSumInc,
+			a_i	=> salSumExp,
+			b_i	=> entSumInc,
 			ci_i	=> '0',
-			s_o		=> salSumInc,
+			s_o	=> salSumInc,
 			co_o	=> open
 		);
 
@@ -162,10 +162,10 @@ architecture behavioral of mult_PF is
 			N => EXP_SIZE
 		)
 		port map(
-			a_i		=> salSumInc,
-			b_i		=> bias,
+			a_i	=> salSumInc,
+			b_i	=> bias,
 			ci_i	=> '0',
-			s_o		=> salSumBias,
+			s_o	=> salSumBias,
 			co_o	=> open
 		);
 
@@ -180,9 +180,9 @@ architecture behavioral of mult_PF is
 			N => N_SIGNIF
 		)
 		port map(
-			multiplicand 	=> significandA,
-			multiplier		=> significandB,
-			result 				=> salMult
+			multiplicand	=> significandA,
+			multiplier	=> significandB,
+			result	=> salMult
 		);
 
 	negToPos <= salRestBiasA(EXP_SIZE-1) AND salRestBiasB(EXP_SIZE-1) AND NOT(salSumExp(EXP_SIZE-1)); 
