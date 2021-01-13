@@ -9,9 +9,9 @@ entity mult_PF is
 		EXP_SIZE:	natural := 6
 	);
 	port(
-		a_i  :		in std_logic_vector(WORD_SIZE-1 downto 0);
-		b_i  :		in std_logic_vector(WORD_SIZE-1 downto 0);
-		s_o  :		out std_logic_vector(WORD_SIZE-1 downto 0)
+		a_i:	in std_logic_vector(WORD_SIZE-1 downto 0);
+		b_i:	in std_logic_vector(WORD_SIZE-1 downto 0);
+		s_o:	out std_logic_vector(WORD_SIZE-1 downto 0)
 	);
 end entity;
 
@@ -20,8 +20,8 @@ architecture behavioral of mult_PF is
 	constant N_MANT:			natural := N_SIGNIF-1;				--tamanio de la mantisa
 	constant N_PROD:			natural := 2*N_SIGNIF;				--tamanio del producto de significANDs
 
-	constant BIAS:				std_logic_vector(EXP_SIZE-1 downto 0)  := '0' & (EXP_SIZE-2 downto 0 => '1');	  --bias
-	constant MINUS_BIAS:		std_logic_vector(EXP_SIZE-1 downto 0)  := std_logic_vector(signed(not bias) + 1); --complemento bias
+	constant BIAS:				std_logic_vector(EXP_SIZE-1 downto 0)  := '0' & (EXP_SIZE-2 downto 0 => '1');		--bias
+	constant MINUS_BIAS:		std_logic_vector(EXP_SIZE-1 downto 0)  := std_logic_vector(signed(not bias) + 1);	--complemento bias
 
 	constant ZERO_EXP:			std_logic_vector(EXP_SIZE-1 downto 0)  := (others => '0'); 
 	constant ONE_EXP:			std_logic_vector(EXP_SIZE-1 downto 0)  := (EXP_SIZE-1 downto 1 => '0') & '1'; 
@@ -60,9 +60,9 @@ architecture behavioral of mult_PF is
 	signal posToNeg:			std_logic;							    
 	signal negToPos:			std_logic;							    
 
-	signal resMultMsb:			std_logic;							    --bit mas significativo de la salida del multiplicador
-	signal underflow:			std_logic;							    --bit de underflow
-	signal overflow:			std_logic;							    --bit de overflow
+	signal resMultMsb:			std_logic;								--bit mas significativo de la salida del multiplicador
+	signal underflow:			std_logic;								--bit de underflow
+	signal overflow:			std_logic;								--bit de overflow
 
 	signal expA:				std_logic_vector(EXP_SIZE-1 downto 0);	--exponente operador A
 	signal expB:				std_logic_vector(EXP_SIZE-1 downto 0);	--exponente operador B
@@ -103,30 +103,30 @@ begin
 	significandA <= '1' & a_i(N_MANT-1 downto 0);
 	significandB <= '1' & b_i(N_MANT-1 downto 0);
 
-	---- instancia sumador de BIAS complementado
+	-- instancia sumador de BIAS complementado
 	restador_biasA: sumNb
 		generic map(
 			N => EXP_SIZE
 		)
 		port map(
-			a_i		=> MINUS_BIAS,
-			b_i		=> expA,
-			ci_i	=> '0',
-			s_o		=> salRestBiasA,
-			co_o	=> open
+			a_i   => MINUS_BIAS,
+			b_i   => expA,
+			ci_i  => '0',
+			s_o   => salRestBiasA,
+			co_o  => open
 		);
 
-	---- instancia sumador de BIAS complementado
+	-- instancia sumador de BIAS complementado
 	restador_biasB: sumNb
 		generic map(
 			N => EXP_SIZE
 		)
 		port map(
-			a_i		=> MINUS_BIAS,
-			b_i		=> expB,
-			ci_i	=> '0',
-			s_o		=> salRestBiasB,
-			co_o	=> open
+			a_i   => MINUS_BIAS,
+			b_i   => expB,
+			ci_i  => '0',
+			s_o   => salRestBiasB,
+			co_o  => open
 		);
 
 	-- instancia sumador de exponentes
@@ -135,11 +135,11 @@ begin
 			N => EXP_SIZE
 		)
 		port map(
-			a_i		=> salRestBiasA,
-			b_i		=> salRestBiasB,
-			ci_i	=> '0',
-			s_o		=> salSumExp,
-			co_o	=> open
+			a_i   => salRestBiasA,
+			b_i   => salRestBiasB,
+			ci_i  => '0',
+			s_o   => salSumExp,
+			co_o  => open
 		);
 
 	--instancia sumador incrementador
@@ -148,11 +148,11 @@ begin
 			N => EXP_SIZE
 		)
 		port map(
-			a_i 	=> salSumExp,
-			b_i		=> entSumInc,
-			ci_i	=> '0',
-			s_o		=> salSumInc,
-			co_o	=> open
+			a_i   => salSumExp,
+			b_i   => entSumInc,
+			ci_i  => '0',
+			s_o   => salSumInc,
+			co_o  => open
 		);
 
 	-- instancia sumador de BIAS	
@@ -161,11 +161,11 @@ begin
 			N => EXP_SIZE
 		)
 		port map(
-			a_i		=> salSumInc,
-			b_i		=> bias,
-			ci_i	=> '0',
-			s_o		=> salSumBias,
-			co_o	=> open
+			a_i   => salSumInc,
+			b_i   => bias,
+			ci_i  => '0',
+			s_o   => salSumBias,
+			co_o  => open
 		);
 
 	--bit mas significativo del producto significandA * significandB.
@@ -179,9 +179,9 @@ begin
 			N => N_SIGNIF
 		)
 		port map(
-			multiplicAND	=> significandA,
-			multiplier		=> significandB,
-			result			=> salMult
+			multiplicAND   => significandA,
+			multiplier     => significandB,
+			result         => salMult
 		);
 
 	negToPos <= salRestBiasA(EXP_SIZE-1) AND salRestBiasB(EXP_SIZE-1) AND NOT(salSumExp(EXP_SIZE-1)); 
@@ -190,8 +190,8 @@ begin
 	
 	--logica underflow.
 	underflow <= negToPos OR 
-				 (negToNeg AND salSumExp(EXP_SIZE-1) AND is_all(salSumExp(EXP_SIZE-2 downto 1),'0') AND 
-				 	(NOT(salSumExp(0)) OR (salSumExp(0) AND NOT(resMultMsb))));
+                 (negToNeg AND salSumExp(EXP_SIZE-1) AND is_all(salSumExp(EXP_SIZE-2 downto 1),'0') AND 
+                 (NOT(salSumExp(0)) OR (salSumExp(0) AND NOT(resMultMsb))));
 
 	--logica overflow.
 	overflow <= posToNeg OR
@@ -199,15 +199,15 @@ begin
 
 
 	salMuxExp <= ZERO_EXP when (overflow = '0' AND underflow ='1') else
-				 MAX_EXP  when (overflow = '1' AND underflow ='0') else
-				 salSumBias;
+                 MAX_EXP  when (overflow = '1' AND underflow ='0') else
+                 salSumBias;
 
 	salMuxMult <= salMult(N_PROD-2 downto N_SIGNIF) when resMultMsb = '1' else 
-				  salMult(N_PROD-3 downto N_SIGNIF-1);
+	              salMult(N_PROD-3 downto N_SIGNIF-1);
 
 	salMuxMantisa <= ZERO_MANT when (overflow = '0' AND underflow ='1') else
-					 MAX_MANT  when (overflow = '1' AND underflow ='0') else
-					 salMuxMult;
+	                 MAX_MANT  when (overflow = '1' AND underflow ='0') else
+	                 salMuxMult;
 
 	--mantisa del resultado.
 	s_o(N_MANT-1 downto 0) <= salMuxMantisa;
