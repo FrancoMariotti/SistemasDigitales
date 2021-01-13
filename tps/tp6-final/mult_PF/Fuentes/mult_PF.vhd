@@ -7,12 +7,12 @@ entity mult_PF is
 	generic(
 		WORD_SIZE:	natural := 23;
 		EXP_SIZE:	natural := 6
-	);
+		);
 	port(
 		a_i:	in std_logic_vector(WORD_SIZE-1 downto 0);
 		b_i:	in std_logic_vector(WORD_SIZE-1 downto 0);
 		s_o:	out std_logic_vector(WORD_SIZE-1 downto 0)
-	);
+		);
 end entity;
 
 architecture behavioral of mult_PF is
@@ -35,25 +35,25 @@ architecture behavioral of mult_PF is
 	component sumNb is
 		generic( 
 			N: natural := 4
-		);
+			);
 		port(
 			a_i:	in std_logic_vector(N-1 downto 0);
 			b_i:	in std_logic_vector(N-1 downto 0);
 			ci_i:	in std_logic;
 			s_o:	out std_logic_vector(N-1 downto 0);
 			co_o:	out std_logic
-		);
+			);
 	end component;
 
 	--declaracion multiplicador.
 	component multNb is
-		generic(
-			N: natural := 4
+	generic(
+		N: natural := 4
 		);
-		port(
-			multiplicAND: in std_logic_vector(N-1 downto 0);
-			multiplier:		in std_logic_vector(N-1 downto 0);
-			result:				out std_logic_vector(2*N-1 downto 0)
+	port(
+		multiplicAND: in std_logic_vector(N-1 downto 0);
+		multiplier:		in std_logic_vector(N-1 downto 0);
+		result:				out std_logic_vector(2*N-1 downto 0)
 		);
 	end component;
 	
@@ -88,16 +88,16 @@ architecture behavioral of mult_PF is
 
 
 	function is_all(vector: std_logic_vector; value: std_logic) return std_logic is
-		constant aux: std_logic_vector(vector'range) := (others => value);
+	constant aux: std_logic_vector(vector'range) := (others => value);
 	begin
-		if vector = aux  then 
-			return '1';
-		end if;
+	if vector = aux  then 
+	return '1';
+	end if;
 
-		return '0';  
+	return '0';  
 	end function;
 
-begin
+	begin
 	expA <= a_i(WORD_SIZE-2 downto N_MANT);
 	expB <= b_i(WORD_SIZE-2 downto N_MANT);
 
@@ -108,66 +108,66 @@ begin
 	restador_biasA: sumNb
 		generic map(
 			N => EXP_SIZE
-		)
+			)
 		port map(
 			a_i		=> MINUS_BIAS,
 			b_i		=> expA,
 			ci_i	=> '0',
 			s_o		=> salRestBiasA,
 			co_o	=> open
-		);
+			);
 
 	-- instancia sumador de BIAS complementado
 	restador_biasB: sumNb
 		generic map(
 			N => EXP_SIZE
-		)
+			)
 		port map(
 			a_i		=> MINUS_BIAS,
 			b_i		=> expB,
 			ci_i	=> '0',
 			s_o		=> salRestBiasB,
 			co_o	=> open
-		);
+			);
 
 	-- instancia sumador de exponentes
 	sumador_exp: sumNb
 		generic map(
 			N => EXP_SIZE
-		)
+			)
 		port map(
 			a_i		=> salRestBiasA,
 			b_i		=> salRestBiasB,
 			ci_i	=> '0',
 			s_o		=> salSumExp,
 			co_o	=> open
-		);
+			);
 
 	--instancia sumador incrementador
 	sumador_inc: sumNb
 		generic map(
 			N => EXP_SIZE
-		)
+			)
 		port map(
 			a_i		=> salSumExp,
 			b_i		=> entSumInc,
 			ci_i	=> '0',
 			s_o		=> salSumInc,
 			co_o	=> open
-		);
+			);
 
 	-- instancia sumador de BIAS	
 	sumador_bias: sumNb
 		generic map(
 			N => EXP_SIZE
-		)
+			)
 		port map(
 			a_i		=> salSumInc,
 			b_i		=> bias,
 			ci_i	=> '0',
 			s_o		=> salSumBias,
 			co_o	=> open
-		);
+			);
 
 	--bit mas significativo del producto significandA * significandB.
 	resMultMsb <= salMult(N_PROD-1);
@@ -178,37 +178,35 @@ begin
 	mult_inst: multNb
 		generic map(
 			N => N_SIGNIF
-		)
+			)
 		port map(
 			multiplicand 	=> significandA,
 			multiplier		=> significandB,
 			result 				=> salMult
-		);
+			);
 
 	negToPos <= salRestBiasA(EXP_SIZE-1) AND salRestBiasB(EXP_SIZE-1) AND NOT(salSumExp(EXP_SIZE-1)); 
 	posToNeg <= NOT(salRestBiasA(EXP_SIZE-1)) AND NOT(salRestBiasB(EXP_SIZE-1)) AND salSumExp(EXP_SIZE-1);
 	negToNeg <= salRestBiasA(EXP_SIZE-1) AND salRestBiasB(EXP_SIZE-1) AND salSumExp(EXP_SIZE-1); 
 	
 	--logica underflow.
-	underflow <= negToPos OR 
-							(negToNeg AND salSumExp(EXP_SIZE-1) AND is_all(salSumExp(EXP_SIZE-2 downto 1),'0') AND 
-							(NOT(salSumExp(0)) OR (salSumExp(0) AND NOT(resMultMsb))));
+	underflow <= negToPos OR (negToNeg AND salSumExp(EXP_SIZE-1) AND is_all(salSumExp(EXP_SIZE-2 downto 1),'0') 
+							AND (NOT(salSumExp(0)) OR (salSumExp(0) AND NOT(resMultMsb))));
 
 	--logica overflow.
-	overflow <= posToNeg OR
-							(resMultMsb AND NOT(salSumExp(EXP_SIZE-1)) AND is_all(salSumExp(EXP_SIZE-2 downto 0),'1'));
+	overflow <= posToNeg OR (resMultMsb AND NOT(salSumExp(EXP_SIZE-1)) AND is_all(salSumExp(EXP_SIZE-2 downto 0),'1'));
 
 
 	salMuxExp <= ZERO_EXP when (overflow = '0' AND underflow ='1') else
-							MAX_EXP  when (overflow = '1' AND underflow ='0') else
-							salSumBias;
+		MAX_EXP  when (overflow = '1' AND underflow ='0') else
+		salSumBias;
 
 	salMuxMult <=	salMult(N_PROD-2 downto N_SIGNIF) when resMultMsb = '1' else 
 								salMult(N_PROD-3 downto N_SIGNIF-1);
 
 	salMuxMantisa	<= ZERO_MANT when (overflow = '0' AND underflow ='1') else
-									MAX_MANT  when (overflow = '1' AND underflow ='0') else
-									salMuxMult;
+										MAX_MANT  when (overflow = '1' AND underflow ='0') else
+										salMuxMult;
 
 	--mantisa del resultado.
 	s_o(N_MANT-1 downto 0) <= salMuxMantisa;
@@ -219,4 +217,4 @@ begin
 	-- signo del resultado.
 	s_o(WORD_SIZE-1) <= a_i(WORD_SIZE-1) xor b_i(WORD_SIZE-1);
 
-end architecture;
+	end architecture;
