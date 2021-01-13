@@ -7,29 +7,29 @@ entity mult_PF is
 	generic(
 		WORD_SIZE:	natural := 23;
 		EXP_SIZE:	natural := 6
-		);
+	);
 	port(
 		a_i:	in std_logic_vector(WORD_SIZE-1 downto 0);
 		b_i:	in std_logic_vector(WORD_SIZE-1 downto 0);
 		s_o:	out std_logic_vector(WORD_SIZE-1 downto 0)
-		);
+	);
 end entity;
 
 architecture behavioral of mult_PF is
 
-	constant N_SIGNIF:		natural := WORD_SIZE - EXP_SIZE;	--tamanio de los significAND
-	constant N_MANT:			natural := N_SIGNIF-1;	--tamanio de la mantisa
-	constant N_PROD:			natural := 2*N_SIGNIF;	--tamanio del producto de significANDs
+	constant N_SIGNIF:	natural := WORD_SIZE - EXP_SIZE;	--tamanio de los significAND
+	constant N_MANT:	natural := N_SIGNIF-1;	--tamanio de la mantisa
+	constant N_PROD:	natural := 2*N_SIGNIF;	--tamanio del producto de significANDs
 
-	constant BIAS:				std_logic_vector(EXP_SIZE-1 downto 0)  := '0' & (EXP_SIZE-2 downto 0 => '1');	--bias
+	constant BIAS:	std_logic_vector(EXP_SIZE-1 downto 0)  := '0' & (EXP_SIZE-2 downto 0 => '1');	--bias
 	constant MINUS_BIAS:	std_logic_vector(EXP_SIZE-1 downto 0)  := std_logic_vector(signed(not bias) + 1);	--complemento bias
 
-	constant ZERO_EXP:		std_logic_vector(EXP_SIZE-1 downto 0)  := (others => '0'); 
-	constant ONE_EXP:			std_logic_vector(EXP_SIZE-1 downto 0)  := (EXP_SIZE-1 downto 1 => '0') & '1'; 
-	constant MAX_EXP:			std_logic_vector(EXP_SIZE-1 downto 0)  := (EXP_SIZE-1 downto 1 => '1') & '0'; 
+	constant ZERO_EXP:	std_logic_vector(EXP_SIZE-1 downto 0)  := (others => '0'); 
+	constant ONE_EXP:	std_logic_vector(EXP_SIZE-1 downto 0)  := (EXP_SIZE-1 downto 1 => '0') & '1'; 
+	constant MAX_EXP:	std_logic_vector(EXP_SIZE-1 downto 0)  := (EXP_SIZE-1 downto 1 => '1') & '0'; 
 
-	constant ZERO_MANT:		std_logic_vector(N_MANT-1 downto 0)  := (others => '0'); 
-	constant MAX_MANT:		std_logic_vector(N_MANT-1 downto 0)  := (N_MANT-1 downto 0 => '1'); 
+	constant ZERO_MANT:	std_logic_vector(N_MANT-1 downto 0)  := (others => '0'); 
+	constant MAX_MANT:	std_logic_vector(N_MANT-1 downto 0)  := (N_MANT-1 downto 0 => '1'); 
 
 	--declaracion sumador generico de N bits.
 	component sumNb is
