@@ -52,14 +52,15 @@ architecture behavioral of mult_PF is
 		);
 		port(
 			multiplicand:	in std_logic_vector(N-1 downto 0);
-			multiplier:		in std_logic_vector(N-1 downto 0);
-			result:			out std_logic_vector(2*N-1 downto 0)
+			multiplier:	in std_logic_vector(N-1 downto 0);
+			result:	out std_logic_vector(2*N-1 downto 0)
 		);
 	end component;
 	
-	signal negToNeg:	std_logic;							    
-	signal posToNeg:	std_logic;							    
-	signal negToPos:	std_logic;							    
+	signal negToNeg:	std_logic;	--señal que determina si un no hubo cambio de signo en la suma de exponentes.
+	signal posToPos:	std_logic;	--señal que determina si un no hubo cambio de signo en la suma de exponentes.
+	signal posToNeg:	std_logic;	--señal que determina si hubo cambio de signo en la suma de exponentes. 
+	signal negToPos:	std_logic;	--señal que determina si hubo cambio de signo en la suma de exponentes.
 
 	signal resMultMsb:	std_logic;	--bit mas significativo de la salida del multiplicador
 	signal underflow:	std_logic;	--bit de underflow
@@ -84,20 +85,21 @@ architecture behavioral of mult_PF is
 	signal salMuxMult:	std_logic_vector(N_MANT-1 downto 0);	--salida del multiplexor que conecta la salida del multiplicador.
 	signal salMuxMantisa:	std_logic_vector(N_MANT-1 downto 0);	--salida del multiplexor que conecta la mantisa a la salida.
 
-	signal salMuxExp:	std_logic_vector(EXP_SIZE-1 downto 0);
+	signal salMuxExp:	std_logic_vector(EXP_SIZE-1 downto 0); -- salida del multiplexor de exponentes
 
 
 	function is_all(vector: std_logic_vector; value: std_logic) return std_logic is
 		constant aux: std_logic_vector(vector'range) := (others => value);
 	begin
 		if vector = aux  then 
-		return '1';
+			return '1';
 		end if;
 
 		return '0';  
 	end function;
 
 	begin
+
 	expA <= a_i(WORD_SIZE-2 downto N_MANT);
 	expB <= b_i(WORD_SIZE-2 downto N_MANT);
 
@@ -188,13 +190,14 @@ architecture behavioral of mult_PF is
 	negToPos <= salRestBiasA(EXP_SIZE-1) AND salRestBiasB(EXP_SIZE-1) AND NOT(salSumExp(EXP_SIZE-1)); 
 	posToNeg <= NOT(salRestBiasA(EXP_SIZE-1)) AND NOT(salRestBiasB(EXP_SIZE-1)) AND salSumExp(EXP_SIZE-1);
 	negToNeg <= salRestBiasA(EXP_SIZE-1) AND salRestBiasB(EXP_SIZE-1) AND salSumExp(EXP_SIZE-1); 
+	posTopos <= NOT(salRestBiasA(EXP_SIZE-1)) AND NOT(salRestBiasB(EXP_SIZE-1)) AND NOT(salSumExp(EXP_SIZE-1)); 
 	
 	--logica underflow.
 	underflow <= negToPos OR (negToNeg AND salSumExp(EXP_SIZE-1) AND is_all(salSumExp(EXP_SIZE-2 downto 1),'0') 
 				 AND (NOT(salSumExp(0)) OR (salSumExp(0) AND NOT(resMultMsb))));
 
 	--logica overflow.
-	overflow <= posToNeg OR (resMultMsb AND NOT(salSumExp(EXP_SIZE-1)) AND is_all(salSumExp(EXP_SIZE-2 downto 0),'1'));
+	overflow <= posToNeg OR (posTopos AND resMultMsb AND NOT(salSumExp(EXP_SIZE-1)) AND is_all(salSumExp(EXP_SIZE-2 downto 0),'1'));
 
 
 	salMuxExp <= ZERO_EXP when (overflow = '0' AND underflow ='1') else

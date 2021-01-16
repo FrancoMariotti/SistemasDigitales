@@ -10,8 +10,10 @@ architecture multPF_tb_arq of multPF_tb is
 	constant SIM_TIME_NS: time := 800 ns;
 	constant TCK: time := 30 ns; 		-- periodo de reloj
 	constant DELAY: natural:= 0; 		-- retardo de procesamiento del DUT
-	constant WORD_SIZE_T:	natural	:=	23;
-	constant EXP_SIZE_T:	natural	:=	6;
+	constant WORD_SIZE_T:	natural	:=	25;
+	constant EXP_SIZE_T:	natural	:=	7;
+	--constant WORD_SIZE_T:	natural	:=	23;
+	--constant EXP_SIZE_T:	natural	:=	6;
 
 	signal	clk_tb:		std_logic := '0';
 	signal a_file: unsigned(WORD_SIZE_T-1 downto 0):= (others => '0');
@@ -23,10 +25,10 @@ architecture multPF_tb_arq of multPF_tb is
 	signal ciclos: integer := 0;
 	signal errores: integer := 0;
 
-	-- La senal z_del_aux se define por un problema de conversión
+	--La senal z_del_aux se define por un problema de conversión
 	signal z_del_aux: std_logic_vector(WORD_SIZE_T-1 downto 0):= (others => '0');
 	
-	file datos: text open read_mode is "../../test_files/test_mul_float_23_6.txt";
+	file datos: text open read_mode is "../../test_files/test_mul_float_25_7.txt";
 
 
 	--declaracion de componente multiplicador de punto flotante.
@@ -62,8 +64,8 @@ architecture multPF_tb_arq of multPF_tb is
 begin
 	
 	clk_tb		<= not(clk_tb) after TCK/ 2;
-	--a_tb		<= std_logic_vector(to_unsigned(8320344,WORD_SIZE_T)), std_logic_vector(to_unsigned(968047,WORD_SIZE_T)) after 100 ns;
-	--b_tb		<= std_logic_vector(to_unsigned(6298089,WORD_SIZE_T)), std_logic_vector(to_unsigned(4951893,WORD_SIZE_T)) after 100 ns,std_logic_vector(to_unsigned(4951893,WORD_SIZE_T)) after 200 ns;
+	--a_tb		<= std_logic_vector(to_unsigned(4058606,WORD_SIZE_T)), std_logic_vector(to_unsigned(968047,WORD_SIZE_T)) after 100 ns;
+	--b_tb		<= std_logic_vector(to_unsigned(20886743,WORD_SIZE_T)), std_logic_vector(to_unsigned(4951893,WORD_SIZE_T)) after 100 ns,std_logic_vector(to_unsigned(4951893,WORD_SIZE_T)) after 200 ns;
 
 	Test_Sequence: process
 		variable l: line;
