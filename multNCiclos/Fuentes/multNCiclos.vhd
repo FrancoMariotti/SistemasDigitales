@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 
-entity multiplicador is
+entity multNCiclos is
 	generic(
 		N: natural := 4
 	);
@@ -12,11 +12,11 @@ entity multiplicador is
 		opA_i    : in std_logic_vector(N-1 downto 0);
 		opB_i    : in std_logic_vector(N-1 downto 0);
 		done_o   : out std_logic;
-		product_o: out std_logic_vector(2*N-1 downto 0)
+		result_o: out std_logic_vector(2*N-1 downto 0)
 	);
-end;
+end entity;
 
-architecture multiplicador_arq of multiplicador is
+architecture multNCiclos_arq of multNCiclos is
 	--declaracion del mponente registro
 	component regNb is
 		generic(
@@ -44,24 +44,22 @@ architecture multiplicador_arq of multiplicador is
 			co_o: 	out std_logic
 		);
 	end component;
-	signal entP,entB,salP,salSum,salB,salA,aux: std_logic_vector(N-1 downto 0);
-	signal co: std_logic;
-	signal enaRegP,enaRegB: std_logic;
+	signal entP,entB,salP,salSum,salB,salA,aux,entB_aux: std_logic_vector(N-1 downto 0);
+	signal co: 				std_logic;
+	signal done_aux: 		std_logic := 'X';
+
 begin
+
 	process(clk_i,load_i) is
-		variable counter: natural;
+		variable counter: natural := N;
 	begin
-		if load_i = '1' then
-			enaRegP <= '1';	
-			enaRegB <= '1';
-			done_o <= '0';
-			counter := 0;
-		elsif rising_edge(clk_i) then
-			if counter = N-1  then
-				enaRegP <= '0';
-				enaRegB <= '0';
-				done_o <= '1';
-			else
+		if rising_edge(clk_i) then
+			if load_i = '1' then
+				done_aux <= '0';
+				counter := 0;
+			elsif counter = (N-1)  then
+				done_aux <= '1';
+			elsif counter < N then
 				counter := counter + 1;
 			end if;
 		end if;
@@ -87,7 +85,7 @@ begin
 		)
 		port map(
 			D_i   => entB,
-			ena_i => enaRegB,
+			ena_i => '1',
 			rst_i => '0',
 			clk_i => clk_i,
 			Q_o   => salB
@@ -99,7 +97,7 @@ begin
 		)
 		port map(
 			D_i   => entP,
-			ena_i => enaRegP,
+			ena_i => '1',
 			rst_i => load_i,
 			clk_i => clk_i,
 			Q_o   => salP
@@ -116,8 +114,17 @@ begin
 			s_o  => salSum,
 			co_o => co
 		);
-	entP <= co & salSum(N-1 downto 1);
-	aux  <= salA  when (salB(0) = '1' and load_i = '0') else (N-1 downto 0 => '0');
-	entB <= opB_i when load_i = '1' else salSum(0) & salB(N-1 downto 1);
-	product_o <= salP & salB; 
-end multiplicador_arq;
+
+	entP <= co & salSum(N-1 downto 1) when done_aux = '0' else salP;
+	
+	aux  <= salA  when salB(0) = '1' else (others => '0');
+
+	entB_aux <= salB  when done_aux = '1' else
+				salSum(0) & salB(N-1 downto 1);
+
+	entB <= opB_i when load_i = '1' else entB_aux;
+	
+	result_o <= salP & salB; 
+	
+	done_o <= done_aux;
+end architecture;

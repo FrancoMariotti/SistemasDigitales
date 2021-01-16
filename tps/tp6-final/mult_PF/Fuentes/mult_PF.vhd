@@ -193,11 +193,11 @@ architecture behavioral of mult_PF is
 	posTopos <= NOT(salRestBiasA(EXP_SIZE-1)) AND NOT(salRestBiasB(EXP_SIZE-1)) AND NOT(salSumExp(EXP_SIZE-1)); 
 	
 	--logica underflow.
-	underflow <= negToPos OR (negToNeg AND salSumExp(EXP_SIZE-1) AND is_all(salSumExp(EXP_SIZE-2 downto 1),'0') 
-				 AND (NOT(salSumExp(0)) OR (salSumExp(0) AND NOT(resMultMsb))));
+	underflow <= negToPos OR (negToNeg AND is_all(salSumExp(EXP_SIZE-2 downto 1),'0') AND 
+				 (NOT(salSumExp(0)) OR (salSumExp(0) AND NOT(resMultMsb))));
 
 	--logica overflow.
-	overflow <= posToNeg OR (posTopos AND resMultMsb AND NOT(salSumExp(EXP_SIZE-1)) AND is_all(salSumExp(EXP_SIZE-2 downto 0),'1'));
+	overflow <= posToNeg OR (posTopos AND resMultMsb AND is_all(salSumExp(EXP_SIZE-2 downto 0),'1'));
 
 
 	salMuxExp <= ZERO_EXP when (overflow = '0' AND underflow ='1') else
