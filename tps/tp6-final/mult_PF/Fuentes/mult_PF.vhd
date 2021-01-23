@@ -22,14 +22,18 @@ architecture behavioral of mult_PF is
 	constant N_PROD:	natural := 2*N_SIGNIF;	--tamanio del producto de significANDs
 
 	constant BIAS:	std_logic_vector(EXP_SIZE-1 downto 0)  := '0' & (EXP_SIZE-2 downto 0 => '1');	--bias
-	constant MINUS_BIAS:	std_logic_vector(EXP_SIZE-1 downto 0)  := std_logic_vector(signed(not bias) + 1);	--complemento bias
+	constant BIAS_NEG:	std_logic_vector(EXP_SIZE-1 downto 0)  := std_logic_vector(signed(not bias) + 1);	--complemento bias
 
-	constant ZERO_EXP:	std_logic_vector(EXP_SIZE-1 downto 0)  := (others => '0'); 
-	constant ONE_EXP:	std_logic_vector(EXP_SIZE-1 downto 0)  := (EXP_SIZE-1 downto 1 => '0') & '1'; 
-	constant MAX_EXP:	std_logic_vector(EXP_SIZE-1 downto 0)  := (EXP_SIZE-1 downto 1 => '1') & '0'; 
+	constant CERO:	std_logic_vector(EXP_SIZE-1 downto 0)  := (others => '0'); 
+	constant UNO:	std_logic_vector(EXP_SIZE-1 downto 0)  := (EXP_SIZE-1 downto 1 => '0') & '1'; 
+	
+	constant EXP_CERO:	std_logic_vector(EXP_SIZE-1 downto 0)  := (others => '0'); 
+	constant EXP_MAX:	std_logic_vector(EXP_SIZE-1 downto 0)  := (EXP_SIZE-1 downto 1 => '1') & '0';
+	constant EXP_INFINITO:	std_logic_vector(EXP_SIZE-1 downto 0)  := (others => '1');
 
-	constant ZERO_MANT:	std_logic_vector(N_MANT-1 downto 0)  := (others => '0'); 
-	constant MAX_MANT:	std_logic_vector(N_MANT-1 downto 0)  := (N_MANT-1 downto 0 => '1'); 
+
+	constant MANT_CERO:	std_logic_vector(N_MANT-1 downto 0)  := (others => '0'); 
+	constant MANT_MAX:	std_logic_vector(N_MANT-1 downto 0)  := (N_MANT-1 downto 0 => '1'); 
 
 	--declaracion sumador generico de N bits.
 	component sumNb is
@@ -57,14 +61,20 @@ architecture behavioral of mult_PF is
 		);
 	end component;
 	
-	signal negToNeg:	std_logic;	--señal que determina si un no hubo cambio de signo en la suma de exponentes.
-	signal posToPos:	std_logic;	--señal que determina si un no hubo cambio de signo en la suma de exponentes.
-	signal posToNeg:	std_logic;	--señal que determina si hubo cambio de signo en la suma de exponentes. 
-	signal negToPos:	std_logic;	--señal que determina si hubo cambio de signo en la suma de exponentes.
+	signal sel:	std_logic_vector(1 downto 0);
 
+	signal andSignos:	std_logic;	--señal que determina si ambos exponentes son negativos
+	signal andSignosNegados:	std_logic;	--señal que determina si ambos exponentes son positivos
 	signal resMultMsb:	std_logic;	--bit mas significativo de la salida del multiplicador
+
+	--bits de excepciones.
+	signal overflowNegSumExp:	std_logic;	--
+	signal overflowPosSumExp:	std_logic;	--
+	signal overflowPosInc:	std_logic;	--
 	signal underflow:	std_logic;	--bit de underflow
 	signal overflow:	std_logic;	--bit de overflow
+	signal zero:	std_logic;	--bit de zero
+	signal infinity:	std_logic;	--bit de overflow
 
 	signal expA:	std_logic_vector(EXP_SIZE-1 downto 0);	--exponente operador A
 	signal expB:	std_logic_vector(EXP_SIZE-1 downto 0);	--exponente operador B
@@ -95,7 +105,7 @@ architecture behavioral of mult_PF is
 			return '1';
 		end if;
 
-		return '0';  
+		return '0';
 	end function;
 
 	begin
@@ -112,7 +122,7 @@ architecture behavioral of mult_PF is
 			N => EXP_SIZE
 		)
 		port map(
-			a_i	=> MINUS_BIAS,
+			a_i	=> BIAS_NEG,
 			b_i	=> expA,
 			ci_i	=> '0',
 			s_o	=> salRestBiasA,
@@ -125,7 +135,7 @@ architecture behavioral of mult_PF is
 			N => EXP_SIZE
 		)
 		port map(
-			a_i	=> MINUS_BIAS,
+			a_i	=> BIAS_NEG,
 			b_i	=> expB,
 			ci_i	=> '0',
 			s_o	=> salRestBiasB,
@@ -165,7 +175,7 @@ architecture behavioral of mult_PF is
 		)
 		port map(
 			a_i	=> salSumInc,
-			b_i	=> bias,
+			b_i	=> BIAS,
 			ci_i	=> '0',
 			s_o	=> salSumBias,
 			co_o	=> open
@@ -174,7 +184,7 @@ architecture behavioral of mult_PF is
 	--bit mas significativo del producto significandA * significandB.
 	resMultMsb <= salMult(N_PROD-1);
 
-	entSumInc <= ONE_EXP when resMultMsb = '1' else ZERO_EXP;
+	entSumInc <= UNO when resMultMsb = '1' else CERO;
 	
 	-- instancia multiplicador para enteros sin signo.
 	mult_inst: multNb
@@ -187,35 +197,53 @@ architecture behavioral of mult_PF is
 			result	=> salMult
 		);
 
-	negToPos <= salRestBiasA(EXP_SIZE-1) AND salRestBiasB(EXP_SIZE-1) AND NOT(salSumExp(EXP_SIZE-1)); 
-	posToNeg <= NOT(salRestBiasA(EXP_SIZE-1)) AND NOT(salRestBiasB(EXP_SIZE-1)) AND salSumExp(EXP_SIZE-1);
-	negToNeg <= salRestBiasA(EXP_SIZE-1) AND salRestBiasB(EXP_SIZE-1) AND salSumExp(EXP_SIZE-1); 
-	posTopos <= NOT(salRestBiasA(EXP_SIZE-1)) AND NOT(salRestBiasB(EXP_SIZE-1)) AND NOT(salSumExp(EXP_SIZE-1)); 
-	
 	--logica underflow.
-	underflow <= negToPos OR (negToNeg AND is_all(salSumExp(EXP_SIZE-2 downto 1),'0') AND 
-				 (NOT(salSumExp(0)) OR (salSumExp(0) AND NOT(resMultMsb))));
+	andSignos <= salRestBiasA(EXP_SIZE-1) and salRestBiasB(EXP_SIZE-1); 
+	overflowNegSumExp <= andSignos and not(salSumExp(EXP_SIZE-1)); 
+	underflow <= overflowNegSumExp or (andSignos and (is_all(salSumBias,'0') or is_all(salSumBias,'1')));
 
 	--logica overflow.
-	overflow <= posToNeg OR (posTopos AND resMultMsb AND is_all(salSumExp(EXP_SIZE-2 downto 0),'1'));
+	andSignosNegados <= not(salRestBiasA(EXP_SIZE-1)) and not(salRestBiasB(EXP_SIZE-1));
+	overflowPosSumExp <= andSignosNegados and salSumExp(EXP_SIZE-1);
+	overflowPosInc <= andSignosNegados and not(salSumExp(EXP_SIZE-1)) and salSumInc(EXP_SIZE-1);
+	overflow <= overflowPosSumExp or overflowPosInc;
 
 
-	salMuxExp <= ZERO_EXP when (overflow = '0' AND underflow ='1') else
-				 MAX_EXP  when (overflow = '1' AND underflow ='0') else
-				 salSumBias;
+	--logica ZERO.
+	zero <= is_all(a_i(WORD_SIZE-2 downto 0),'0') or is_all(b_i(WORD_SIZE-2 downto 0),'0');
+	
+	--logica INFINITY.
+	infinity <= (is_all(expA,'1') and is_all(a_i(N_MANT-1 downto 0),'0')) or 
+				(is_all(expB,'1') and is_all(b_i(N_MANT-1 downto 0),'0'));
+
 
 	salMuxMult <= salMult(N_PROD-2 downto N_SIGNIF) when resMultMsb = '1' else 
 				  salMult(N_PROD-3 downto N_SIGNIF-1);
 
-	salMuxMantisa <= ZERO_MANT when (overflow = '0' AND underflow ='1') else
-					 MAX_MANT  when (overflow = '1' AND underflow ='0') else
+
+
+	salMuxExp <= EXP_CERO when (overflow = '0' AND underflow ='1') else
+				 EXP_MAX  when (overflow = '1' AND underflow ='0') else
+				 salSumBias;
+
+	salMuxMantisa <= MANT_CERO when (overflow = '0' AND underflow ='1') else
+					 MANT_MAX  when (overflow = '1' AND underflow ='0') else
 					 salMuxMult;
+	
+
+
+	sel(0) <= zero;
+	sel(1) <= infinity;
+
+	--exponente del resultado.
+	s_o(WORD_SIZE-2 downto N_MANT) <= EXP_CERO when sel = "01" else 
+									 EXP_INFINITO when sel = "10" else
+									 salMuxExp;
 
 	--mantisa del resultado.
-	s_o(N_MANT-1 downto 0) <= salMuxMantisa;
-
-	----exponente del resultado.
-	s_o(WORD_SIZE-2 downto N_MANT) <= salMuxExp;
+	s_o(N_MANT-1 downto 0) <= MANT_CERO when sel = "01" else 
+							  MANT_CERO when sel = "10" else
+							  salMuxMantisa;
 
 	-- signo del resultado.
 	s_o(WORD_SIZE-1) <= a_i(WORD_SIZE-1) xor b_i(WORD_SIZE-1);
