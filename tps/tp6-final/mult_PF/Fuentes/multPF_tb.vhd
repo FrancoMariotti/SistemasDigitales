@@ -64,11 +64,21 @@ architecture multPF_tb_arq of multPF_tb is
 begin
 	
 	clk_tb		<= not(clk_tb) after TCK/ 2;
-	--a_tb		<= std_logic_vector(to_unsigned(8323071,WORD_SIZE_T)); --, std_logic_vector(to_unsigned(968047,WORD_SIZE_T)) after 100 ns;
-	--b_tb		<= std_logic_vector(to_unsigned(2031616,WORD_SIZE_T)); --, std_logic_vector(to_unsigned(4951893,WORD_SIZE_T)) after 100 ns,std_logic_vector(to_unsigned(4951893,WORD_SIZE_T)) after 200 ns;
+	--a_tb		<= std_logic_vector(to_unsigned(33423359,WORD_SIZE_T)); 
+	--b_tb		<= std_logic_vector(to_unsigned(16646144,WORD_SIZE_T));
 
-	--a_tb		<= std_logic_vector(to_unsigned(0,WORD_SIZE_T)); --, std_logic_vector(to_unsigned(968047,WORD_SIZE_T)) after 100 ns;
-	--b_tb		<= std_logic_vector(to_unsigned(0,WORD_SIZE_T)); --, std_logic_vector(to_unsigned(4951893,WORD_SIZE_T)) after 100 ns,std_logic_vector(to_unsigned(4951893,WORD_SIZE_T)) after 200 ns;
+	--a_tb		<= std_logic_vector(to_unsigned(16646144,WORD_SIZE_T)); 
+	--b_tb		<= std_logic_vector(to_unsigned(16646144,WORD_SIZE_T));
+
+	--a_tb		<= std_logic_vector(to_unsigned(33391685,WORD_SIZE_T)); 
+	--b_tb		<= std_logic_vector(to_unsigned(25053421,WORD_SIZE_T));
+
+	--a_tb		<= std_logic_vector(to_unsigned(20762451,WORD_SIZE_T)); 
+	--b_tb		<= std_logic_vector(to_unsigned(20796580,WORD_SIZE_T));
+
+
+	--a_tb		<= std_logic_vector(to_unsigned(0,WORD_SIZE_T)); 
+	--b_tb		<= std_logic_vector(to_unsigned(0,WORD_SIZE_T));
 
 
 	Test_Sequence: process

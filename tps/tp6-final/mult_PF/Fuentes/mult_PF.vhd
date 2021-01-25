@@ -63,8 +63,8 @@ architecture behavioral of mult_PF is
 	
 	signal sel:	std_logic_vector(1 downto 0);
 
-	signal andSignos:	std_logic;	--señal que determina si ambos exponentes son negativos
-	signal andSignosNegados:	std_logic;	--señal que determina si ambos exponentes son positivos
+	signal andSignosExp:	std_logic;	--señal que determina si ambos exponentes son negativos
+	signal andSignosNegadosExp:	std_logic;	--señal que determina si ambos exponentes son positivos
 	signal resMultMsb:	std_logic;	--bit mas significativo de la salida del multiplicador
 
 	--bits de excepciones.
@@ -99,9 +99,9 @@ architecture behavioral of mult_PF is
 
 
 	function is_all(vector: std_logic_vector; value: std_logic) return std_logic is
-		constant aux: std_logic_vector(vector'range) := (others => value);
+		variable aux: std_logic_vector(vector'range) := (others => value);
 	begin
-		if vector = aux  then 
+		if vector = aux then
 			return '1';
 		end if;
 
@@ -198,15 +198,15 @@ architecture behavioral of mult_PF is
 		);
 
 	--logica underflow.
-	andSignos <= salRestBiasA(EXP_SIZE-1) and salRestBiasB(EXP_SIZE-1); 
-	overflowNegSumExp <= andSignos and not(salSumExp(EXP_SIZE-1)); 
-	underflow <= overflowNegSumExp or (andSignos and (is_all(salSumBias,'0') or is_all(salSumBias,'1')));
+	andSignosExp <= salRestBiasA(EXP_SIZE-1) and salRestBiasB(EXP_SIZE-1); 
+	overflowNegSumExp <= andSignosExp and not(salSumExp(EXP_SIZE-1)); 
+	underflow <= overflowNegSumExp or (andSignosExp and (is_all(salSumBias,'0') or is_all(salSumBias,'1')));
 
 	--logica overflow.
-	andSignosNegados <= not(salRestBiasA(EXP_SIZE-1)) and not(salRestBiasB(EXP_SIZE-1));
-	overflowPosSumExp <= andSignosNegados and salSumExp(EXP_SIZE-1);
-	overflowPosInc <= andSignosNegados and not(salSumExp(EXP_SIZE-1)) and salSumInc(EXP_SIZE-1);
-	overflow <= overflowPosSumExp or overflowPosInc;
+	andSignosNegadosExp <= not(salRestBiasA(EXP_SIZE-1)) and not(salRestBiasB(EXP_SIZE-1));
+	overflowPosSumExp <= andSignosNegadosExp and salSumExp(EXP_SIZE-1);
+	overflowPosInc <= andSignosNegadosExp and not(salSumExp(EXP_SIZE-1)) and salSumInc(EXP_SIZE-1);
+	overflow <=  overflowPosSumExp or overflowPosInc;
 
 
 	--logica ZERO.
