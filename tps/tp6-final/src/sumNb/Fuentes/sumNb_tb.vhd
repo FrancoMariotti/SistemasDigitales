@@ -23,21 +23,21 @@ architecture sumNb_tb_arq of sumNb_tb is
 	signal errores: integer := 0;
 	
 	--La senal z_del_aux se define por un problema de conversión
-	--signal z_del_aux: std_logic_vector(N_tb-1 downto 0):= (others => '0');
+	signal z_del_aux: std_logic_vector(N_tb-1 downto 0):= (others => '0');
 	
 	file datos: text open read_mode is "../../test_files/test_adder_2.txt";
 
 	--declaracion componente sumador N bits.
-	component sumNb is
-		generic( N: natural := 4);
-		port(
-			a_i: 	in std_logic_vector(N-1 downto 0);
-			b_i: 	in std_logic_vector(N-1 downto 0);
-			ci_i: 	in std_logic;
-			s_o: 	out std_logic_vector(N-1 downto 0);
-			co_o: 	out std_logic
-		);
-	end component;
+	--component sumNb is
+	--	generic( N: natural := 4);
+	--	port(
+	--		a_i: 	in std_logic_vector(N-1 downto 0);
+	--		b_i: 	in std_logic_vector(N-1 downto 0);
+	--		ci_i: 	in std_logic;
+	--		s_o: 	out std_logic_vector(N-1 downto 0);
+	--		co_o: 	out std_logic
+	--	);
+	--end component;
 
 	signal ci_tb: std_logic := '0';
 	signal co_tb: std_logic;
@@ -49,8 +49,8 @@ architecture sumNb_tb_arq of sumNb_tb is
 begin
 	-- Generacion del clock del sistema
 	clk <= not(clk) after TCK/ 2; -- reloj
-	a_tb <= std_logic_vector(to_signed(-45,N_tb)) after 23 ns , std_logic_vector(to_signed(-42,N_tb)) after 75 ns;
-	b_tb <= std_logic_vector(to_signed(8,N_tb)) after 21 ns , std_logic_vector(to_signed(68,N_tb)) after 66 ns;
+	--a_tb <= std_logic_vector(to_signed(-45,N_tb)) after 23 ns , std_logic_vector(to_signed(-42,N_tb)) after 75 ns;
+	--b_tb <= std_logic_vector(to_signed(8,N_tb)) after 21 ns , std_logic_vector(to_signed(68,N_tb)) after 66 ns;
 
 	Test_Sequence: process
 		variable l: line;
@@ -77,7 +77,7 @@ begin
 			"Fin de la simulacion" severity failure;
 	end process Test_Sequence;
 
-	DUT: sumNb
+	DUT: entity work.sumNb(sumNb_arq)
 		generic map(
 			N => N_tb
 		)

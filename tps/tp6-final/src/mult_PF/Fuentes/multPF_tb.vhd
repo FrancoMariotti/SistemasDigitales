@@ -8,7 +8,7 @@ end;
 
 architecture multPF_tb_arq of multPF_tb is
 	constant SIM_TIME_NS: time := 800 ns;
-	constant TCK: time := 35 ns; 		-- periodo de reloj
+	constant TCK: time := 50 ns; 		-- periodo de reloj
 	constant DELAY: natural:= 0; 		-- retardo de procesamiento del DUT
 	constant WORD_SIZE_T:	natural	:=	25;
 	constant EXP_SIZE_T:	natural	:=	7;

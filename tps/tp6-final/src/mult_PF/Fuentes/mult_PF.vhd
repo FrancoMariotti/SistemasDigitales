@@ -49,7 +49,7 @@ architecture behavioral of mult_PF is
 		);
 	end component;
 
-	--declaracion multiplicador.
+	----declaracion multiplicador.
 	component multNb is
 		generic(
 			N: natural := 4
@@ -68,9 +68,9 @@ architecture behavioral of mult_PF is
 	signal resMultMsb:	std_logic;	--bit mas significativo de la salida del multiplicador
 
 	--bits de excepciones.
-	signal overflowNegSumExp:	std_logic;	--
-	signal overflowPosSumExp:	std_logic;	--
-	signal overflowPosInc:	std_logic;	--
+	signal overflowNegSumExp:	std_logic;	-- overflow negativo suma exponentes
+	signal overflowPosSumExp:	std_logic;	-- overflow positivo suma exponentes
+	signal overflowPosInc:	std_logic;	-- overflow positivo incrementador
 	signal underflow:	std_logic;	--bit de underflow
 	signal overflow:	std_logic;	--bit de overflow
 	signal zero:	std_logic;	--bit de zero
@@ -202,12 +202,11 @@ architecture behavioral of mult_PF is
 	overflowNegSumExp <= andSignosExp and not(salSumExp(EXP_SIZE-1)); 
 	underflow <= overflowNegSumExp or (andSignosExp and (is_all(salSumBias,'0') or is_all(salSumBias,'1')));
 
-	--logica overflow.
+	----logica overflow.
 	andSignosNegadosExp <= not(salRestBiasA(EXP_SIZE-1)) and not(salRestBiasB(EXP_SIZE-1));
 	overflowPosSumExp <= andSignosNegadosExp and salSumExp(EXP_SIZE-1);
 	overflowPosInc <= andSignosNegadosExp and not(salSumExp(EXP_SIZE-1)) and salSumInc(EXP_SIZE-1);
 	overflow <=  overflowPosSumExp or overflowPosInc;
-
 
 	--logica ZERO.
 	zero <= is_all(a_i(WORD_SIZE-2 downto 0),'0') or is_all(b_i(WORD_SIZE-2 downto 0),'0');

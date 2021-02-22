@@ -1,7 +1,0 @@
-v 4
-file . "../../Fuentes/regNb_tb.vhd" "488a5944c8ad49285413d6f04935634299c15931" "20210105042611.192":
-  entity regnb_tb at 1( 0) + 0 on 33;
-  architecture regnb_tb_arq of regnb_tb at 8( 115) + 0 on 34;
-file . "../../Fuentes/regNb.vhd" "6ec96804543a90ad28766efc20b947bb88d907b0" "20210105041206.785":
-  entity regnb at 1( 0) + 0 on 19;
-  architecture regnb_arq of regnb at 18( 271) + 0 on 20;
