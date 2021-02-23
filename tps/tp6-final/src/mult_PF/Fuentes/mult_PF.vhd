@@ -93,9 +93,9 @@ architecture behavioral of mult_PF is
 	signal salRestBiasB:	std_logic_vector(EXP_SIZE-1 downto 0);	--salida restador de bias del operador B
 
 	signal salMuxMult:	std_logic_vector(N_MANT-1 downto 0);	--salida del multiplexor que conecta la salida del multiplicador.
-	signal salMuxMantisa:	std_logic_vector(N_MANT-1 downto 0);	--salida del multiplexor que conecta la mantisa a la salida.
-
-	signal salMuxExp:	std_logic_vector(EXP_SIZE-1 downto 0); -- salida del multiplexor de exponentes
+	--signal salMuxMantisa:	std_logic_vector(N_MANT-1 downto 0);	--salida del multiplexor que conecta la mantisa a la salida.
+	--signal salMuxExp:	std_logic_vector(EXP_SIZE-1 downto 0); -- salida del multiplexor de exponentes
+	signal salMuxExpMantisa:	std_logic_vector(WORD_SIZE-2 downto 0); -- salida del multiplexor de exponentes
 
 
 	function is_all(vector: std_logic_vector; value: std_logic) return std_logic is
@@ -221,15 +221,17 @@ architecture behavioral of mult_PF is
 
 
 
-	salMuxExp <= EXP_CERO when (overflow = '0' AND underflow ='1') else
-				 EXP_MAX  when (overflow = '1' AND underflow ='0') else
-				 salSumBias;
+	--salMuxExp <= EXP_CERO when (overflow = '0' AND underflow ='1') else
+	--			 EXP_MAX  when (overflow = '1' AND underflow ='0') else
+	--			 salSumBias;
 
-	salMuxMantisa <= MANT_CERO when (overflow = '0' AND underflow ='1') else
-					 MANT_MAX  when (overflow = '1' AND underflow ='0') else
-					 salMuxMult;
-	
+	--salMuxMantisa <= MANT_CERO when (overflow = '0' AND underflow ='1') else
+	--				 MANT_MAX  when (overflow = '1' AND underflow ='0') else
+	--				 salMuxMult;
 
+	salMuxExpMantisa <= (EXP_CERO & MANT_CERO) when (overflow = '0' AND underflow ='1') else
+						(EXP_MAX & MANT_MAX) when (overflow = '1' AND underflow ='0') else
+						(salSumBias & salMuxMult);
 
 	sel(0) <= zero;
 	sel(1) <= infinity;
@@ -237,7 +239,7 @@ architecture behavioral of mult_PF is
 	--exponente y mantisa del resultado.
 	s_o(WORD_SIZE-2 downto 0) <= (EXP_CERO & MANT_CERO) when sel = "01" else 
 							  (EXP_INFINITO & MANT_CERO) when sel = "10" else
-							  (salMuxExp & salMuxMantisa);
+							  salMuxExpMantisa;
 
 	-- signo del resultado.
 	s_o(WORD_SIZE-1) <= a_i(WORD_SIZE-1) xor b_i(WORD_SIZE-1);
