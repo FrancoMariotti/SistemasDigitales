@@ -93,8 +93,6 @@ architecture behavioral of mult_PF is
 	signal salRestBiasB:	std_logic_vector(EXP_SIZE-1 downto 0);	--salida restador de bias del operador B
 
 	signal salMuxMult:	std_logic_vector(N_MANT-1 downto 0);	--salida del multiplexor que conecta la salida del multiplicador.
-	--signal salMuxMantisa:	std_logic_vector(N_MANT-1 downto 0);	--salida del multiplexor que conecta la mantisa a la salida.
-	--signal salMuxExp:	std_logic_vector(EXP_SIZE-1 downto 0); -- salida del multiplexor de exponentes
 	signal salMuxExpMantisa:	std_logic_vector(WORD_SIZE-2 downto 0); -- salida del multiplexor de exponentes
 
 
@@ -218,16 +216,6 @@ architecture behavioral of mult_PF is
 
 	salMuxMult <= salMult(N_PROD-2 downto N_SIGNIF) when resMultMsb = '1' else 
 				  salMult(N_PROD-3 downto N_SIGNIF-1);
-
-
-
-	--salMuxExp <= EXP_CERO when (overflow = '0' AND underflow ='1') else
-	--			 EXP_MAX  when (overflow = '1' AND underflow ='0') else
-	--			 salSumBias;
-
-	--salMuxMantisa <= MANT_CERO when (overflow = '0' AND underflow ='1') else
-	--				 MANT_MAX  when (overflow = '1' AND underflow ='0') else
-	--				 salMuxMult;
 
 	salMuxExpMantisa <= (EXP_CERO & MANT_CERO) when (overflow = '0' AND underflow ='1') else
 						(EXP_MAX & MANT_MAX) when (overflow = '1' AND underflow ='0') else
