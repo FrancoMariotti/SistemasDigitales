@@ -234,15 +234,10 @@ architecture behavioral of mult_PF is
 	sel(0) <= zero;
 	sel(1) <= infinity;
 
-	--exponente del resultado.
-	s_o(WORD_SIZE-2 downto N_MANT) <= EXP_CERO when sel = "01" else 
-									 EXP_INFINITO when sel = "10" else
-									 salMuxExp;
-
-	--mantisa del resultado.
-	s_o(N_MANT-1 downto 0) <= MANT_CERO when sel = "01" else 
-							  MANT_CERO when sel = "10" else
-							  salMuxMantisa;
+	--exponente y mantisa del resultado.
+	s_o(WORD_SIZE-2 downto 0) <= (EXP_CERO & MANT_CERO) when sel = "01" else 
+							  (EXP_INFINITO & MANT_CERO) when sel = "10" else
+							  (salMuxExp & salMuxMantisa);
 
 	-- signo del resultado.
 	s_o(WORD_SIZE-1) <= a_i(WORD_SIZE-1) xor b_i(WORD_SIZE-1);
