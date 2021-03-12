@@ -1,14 +1,17 @@
 entity cordic is
-    generic()
+    generic(
+        Nxy: natural 16
+        Nangle: natural 16
+    );
     map(
         clk_i: in std_logic,
         rst_i: in std_logic,
-        x_i: in std_logic_vector(),
-        y_i: in std_logic_vector(),
-        angle_i: in std_logic_vector(),
-        x_o: out std_logic_vector(),
-        y_o: out std_logic_vector()
-    )
+        x_i: in std_logic_vector(Nxy-1 downto 0),
+        y_i: in std_logic_vector(Nxy-1 downto 0),
+        angle_i: in std_logic_vector(Nangle-1 downto 0),
+        x_o: out std_logic_vector(Nxy-1 downto 0),
+        y_o: out std_logic_vector(Nxy-1 downto 0)
+    );
 end entity cordic;
 
 architecture behavioural of cordic is
