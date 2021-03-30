@@ -11,7 +11,7 @@ entity sumNb is
 		s_o: 	out std_logic_vector(N-1 downto 0);
 		co_o: 	out std_logic
 	);
-end;
+end entity sumNb;
 
 
 architecture sumNb_arq of sumNb is

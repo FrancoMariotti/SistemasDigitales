@@ -11,7 +11,7 @@ entity regNb is
 		clk_i:	in	std_logic;
 		Q_o:	out	std_logic_vector(N-1 downto 0)
 	);
-end;
+end entity regNb;
 
 
 architecture regNb_arq of regNb is

@@ -14,8 +14,100 @@ entity cordic is
     );
 end entity cordic;
 
+
+--cordic pipeline.
 architecture behavioural of cordic is
+    --declaracion sumador de N bits.
+    component sumNb is
+        generic( 
+            N: natural := 4
+        );
+        port(
+            a_i:    in std_logic_vector(N-1 downto 0);
+            b_i:    in std_logic_vector(N-1 downto 0);
+            control:    in std_logic;
+            s_o:    out std_logic_vector(N-1 downto 0);
+            co_o:   out std_logic
+        );
+    end component;
 
+    --declaracion registro de N bits.
+    component regNb is
+        generic(
+            N: natural := 4
+        );
+        port(
+            D_i:    in  std_logic_vector(N-1 downto 0);
+            rst_i:  in  std_logic;
+            clk_i:  in  std_logic;
+            Q_o:    out std_logic_vector(N-1 downto 0)
+        );
+    end component;
+
+    type SIGNAL_ARRAY is array(integer range <>) of std_logic_vector;
+
+    signal aux1: SIGNAL_ARRAY(Nxy-1 downto 0); 
 begin
+    -- preprocesamiento
 
+
+    aux1(0) <= x_i;
+    aux2(0) <= y_i;
+
+    --cordic
+    step : for i in 0 to Nxy-1 generate
+
+            Sum_inst1: sumNb 
+                generic map ( 
+                    N => Nangle
+                )
+                port map (
+                    a_i => ,
+                    b_i => ,
+                    control => ,
+                    s_o    => ,
+                    co_o   => 
+                );
+
+            Sum_inst2: sumNb 
+                generic map ( 
+                    N => Nxy
+                )
+                port map (
+                    a_i => aux1(i),
+                    b_i => ,
+                    control => ,
+                    s_o    => ,
+                    co_o   => 
+                );
+
+
+            Sum_inst3: sumNb 
+                generic map ( 
+                    N => Nxy
+                )
+                port map (
+                    a_i => aux2(i),
+                    b_i => ,
+                    control => ,
+                    s_o    => ,
+                    co_o   => 
+                );
+
+
+            RegSal_inst: regNb 
+                generic map(
+                    N => 
+                )
+                port map(
+                    D_i => ,
+                    rst_i => ,
+                    clk_i => ,
+                    Q_o =>
+                );
+
+    end generate ; -- step
+    
+
+    --post-procesamiento.
 end architecture;
