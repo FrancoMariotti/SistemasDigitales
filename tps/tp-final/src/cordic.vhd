@@ -47,6 +47,7 @@ architecture behavioural of cordic is
     type SIGNAL_ARRAY is array(integer range <>) of std_logic_vector;
 
     signal aux1: SIGNAL_ARRAY(Nxy-1 downto 0); 
+    signal signo: std_logic;
 begin
     -- preprocesamiento
 
@@ -57,6 +58,8 @@ begin
     --cordic
     step : for i in 0 to Nxy-1 generate
 
+            signo <= aux1(0);
+
             Sum_inst1: sumNb 
                 generic map ( 
                     N => Nangle
@@ -64,9 +67,9 @@ begin
                 port map (
                     a_i => ,
                     b_i => ,
-                    control => ,
+                    control => signo,
                     s_o    => ,
-                    co_o   => 
+                    co_o   => open
                 );
 
             Sum_inst2: sumNb 
@@ -76,9 +79,9 @@ begin
                 port map (
                     a_i => aux1(i),
                     b_i => ,
-                    control => ,
+                    control => signo,
                     s_o    => ,
-                    co_o   => 
+                    co_o   => open
                 );
 
 
@@ -89,9 +92,9 @@ begin
                 port map (
                     a_i => aux2(i),
                     b_i => ,
-                    control => ,
+                    control => signo,
                     s_o    => ,
-                    co_o   => 
+                    co_o   => open
                 );
 
 
