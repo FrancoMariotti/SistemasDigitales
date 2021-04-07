@@ -52,62 +52,105 @@ begin
     -- preprocesamiento
 
 
-    aux1(0) <= x_i;
-    aux2(0) <= y_i;
+    x_aux(0) <= x_i;
+    y_aux(0) <= y_i;
+    z_aux(0) <= angle_i;
 
     --cordic
     step : for i in 0 to Nxy-1 generate
 
-            signo <= aux1(0);
+            signo <= x_aux(0)(0);
 
-            Sum_inst1: sumNb 
+            --shift x, i posiciones a la izquierda 
+            x_aux2 <= (i-1 downto 0 => '0') & x_aux(i)(Nxy-i-1);
+            
+            --shift y, i posiciones a la izquierda 
+            y_aux2 <= (i-1 downto 0 => '0') & y_aux(i)(Nxy-i-1);
+
+            --Sumador angulo Z
+            Z_adder: sumNb 
                 generic map ( 
                     N => Nangle
                 )
                 port map (
-                    a_i => ,
-                    b_i => ,
+                    a_i => z_aux(i),
+                    b_i => ,--cte
                     control => signo,
-                    s_o    => ,
+                    s_o    => z_adder_out(i),
                     co_o   => open
                 );
 
-            Sum_inst2: sumNb 
+            --Sumador Y
+            Y_adder: sumNb 
                 generic map ( 
                     N => Nxy
                 )
                 port map (
-                    a_i => aux1(i),
-                    b_i => ,
+                    a_i => y_aux(i),
+                    b_i => x_aux2(i),
                     control => signo,
-                    s_o    => ,
+                    s_o    => y_adder_out(i),
                     co_o   => open
                 );
 
-
-            Sum_inst3: sumNb 
+            --Sumador X
+            X_adder: sumNb 
                 generic map ( 
                     N => Nxy
                 )
                 port map (
-                    a_i => aux2(i),
-                    b_i => ,
+                    a_i => x_aux(i),
+                    b_i => y_aux2(i),
                     control => signo,
-                    s_o    => ,
+                    s_o    => x_adder_out(i),
                     co_o   => open
                 );
 
 
-            RegSal_inst: regNb 
-                generic map(
-                    N => 
-                )
-                port map(
-                    D_i => ,
-                    rst_i => ,
-                    clk_i => ,
-                    Q_o =>
-                );
+            if (i = Nxy-1) then
+                x_o <= x_adder_out(i);
+                y_o <= y_adder_out(i);
+                z_o <= z_adder_out(i);
+            else
+                --Registro interetapa X.
+                Reg_adder_x: regNb 
+                    generic map(
+                        N => Nxy
+                    )
+                    port map(
+                        D_i => x_adder_out(i),
+                        rst_i => rst_i,
+                        clk_i => clk_i,
+                        Q_o => x_aux(i+1)
+                    );
+                --Registro interetapa Y.
+                Reg_adder_y: regNb 
+                    generic map(
+                        N => Nxy
+                    )
+                    port map(
+                        D_i => y_adder_out(i),
+                        rst_i => rst_i,
+                        clk_i => clk_i,
+                        Q_o => y_aux(i+1)
+                    );
+
+
+                --Registro interetapa Z.
+                Reg_adder_z: regNb 
+                    generic map(
+                        N => Nangle
+                    )
+                    port map(
+                        D_i => z_adder_out(i),
+                        rst_i => rst_i,
+                        clk_i => clk_i,
+                        Q_o => z_aux(i+1)
+                    );
+
+
+            end if;
+
 
     end generate ; -- step
     
