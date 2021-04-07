@@ -1,7 +1,10 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+
 entity cordic is
     generic(
-        Nxy: natural 16
-        Nangle: natural 16
+        Nxy: natural := 16;
+        Nangle: natural := 16
     );
     port(
         rst_i: in std_logic;
@@ -44,9 +47,20 @@ architecture behavioural of cordic is
         );
     end component;
 
-    type SIGNAL_ARRAY is array(integer range <>) of std_logic_vector;
+    type xy_signal_arr is array(natural range <>) of std_logic_vector(Nxy-1 downto 0);
+    type z_signal_arr is array(natural range <>) of std_logic_vector(Nangle-1 downto 0);
 
-    signal aux1: SIGNAL_ARRAY(Nxy-1 downto 0); 
+    signal x_aux: xy_signal_arr(Nxy-1 downto 0); 
+    signal y_aux: xy_signal_arr(Nxy-1 downto 0);
+    signal z_aux: z_signal_arr(Nxy-1 downto 0);     
+    
+    signal x_aux2: xy_signal_arr(Nxy-1 downto 0); 
+    signal y_aux2: xy_signal_arr(Nxy-1 downto 0);
+    
+    signal x_adder_out: xy_signal_arr(Nxy-1 downto 0);
+    signal y_adder_out: xy_signal_arr(Nxy-1 downto 0);
+    signal z_adder_out: z_signal_arr(Nxy-1 downto 0);
+
     signal signo: std_logic;
 begin
     -- preprocesamiento
@@ -78,7 +92,7 @@ begin
                     control => signo,
                     s_o    => z_adder_out(i),
                     co_o   => open
-                );
+                ); 
 
             --Sumador Y
             Y_adder: sumNb 
@@ -107,11 +121,17 @@ begin
                 );
 
 
-            if (i = Nxy-1) then
+            salida: if (i = Nxy-1) generate
+
+            begin
                 x_o <= x_adder_out(i);
                 y_o <= y_adder_out(i);
                 z_o <= z_adder_out(i);
-            else
+
+            end generate salida;
+
+            registro: if (i /= Nxy-1) generate
+ 
                 --Registro interetapa X.
                 Reg_adder_x: regNb 
                     generic map(
@@ -149,10 +169,10 @@ begin
                     );
 
 
-            end if;
+            end generate registro;
 
 
-    end generate ; -- step
+    end generate step; -- step
     
 
     --post-procesamiento.
