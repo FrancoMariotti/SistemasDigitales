@@ -3,7 +3,7 @@ entity cordic is
         Nxy: natural 16
         Nangle: natural 16
     );
-    map(
+    port(
         rst_i: in std_logic;
         clk_i: in std_logic;
         x_i: in std_logic_vector(Nxy-1 downto 0);
